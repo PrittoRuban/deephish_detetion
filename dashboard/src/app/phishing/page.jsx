@@ -1,3 +1,8 @@
+import React from 'react'
+
 export default function Phishing() {
-  return <div>Phishing</div>;
+  return (
+    <div>Phishing
+  </div>
+  )
 }
