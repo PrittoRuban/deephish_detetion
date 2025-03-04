@@ -1,9 +1,9 @@
-import Dashboard from "@/components/Dashboard";
+import Dashboard from "@/components/Home";
 
 export default async function Home() {
   return (
-    <div className="container mx-auto p-4">
-      <Dashboard />
-    </div>
+    <main className="flex flex-col items-center px-4">
+      <Home />
+    </main>
   );
 }
