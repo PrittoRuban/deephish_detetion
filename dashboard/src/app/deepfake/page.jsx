@@ -21,5 +21,9 @@ export default function Deepfake() {
     fetchMessage();
   }, []);
 
-  return <div>{error ? <p>Error: {error}</p> : <p>{message}</p>}</div>;
+  return (
+    <div className="flex flex-col items-center px-4">
+      {error ? <p>Error: {error}</p> : <p>{message}</p>}
+    </div>
+  );
 }
