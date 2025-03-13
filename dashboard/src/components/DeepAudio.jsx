@@ -135,7 +135,7 @@ export default function DeepAudio() {
 
         {result && (
           <div className="mt-8 p-4 bg-gray-100 dark:bg-white/10 rounded-lg">
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white capitalize">
               Result: {result}
             </h2>
           </div>
