@@ -39,9 +39,7 @@ export default async function handler(req, res) {
       // Ensure token is available
       if (!process.env.HF_IMAGE_TOKEN) {
         console.error("Hugging Face token missing.");
-        return res
-          .status(500)
-          .json({ error: "Hugging Face token is not set." });
+        return res.status(500).json({ error: "Hugging Face token is not set." });
       }
 
       // Connect to Hugging Face Space

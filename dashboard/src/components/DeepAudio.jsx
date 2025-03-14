@@ -71,8 +71,8 @@ export default function DeepAudio() {
   };
 
   return (
-    <div className="min-h-screen">
-      <div className="max-w-4xl mx-auto px-4 text-center">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-200 px-6">
+      <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">
           Detect Audio DeepFakes
         </h1>
@@ -134,7 +134,7 @@ export default function DeepAudio() {
         </form>
 
         {result && (
-          <div className="mt-8 p-4 bg-gray-100 dark:bg-white/10 rounded-lg">
+          <div className="mt-8 p-4 bg-gray-100 dark:bg-white/10 rounded-2xl">
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white capitalize">
               Result: {result}
             </h2>

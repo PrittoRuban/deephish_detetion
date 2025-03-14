@@ -2,7 +2,7 @@ import DeepAudio from "@/components/DeepAudio";
 
 const DeepAudioAnalysis = () => {
   return (
-    <div className="flex flex-col px-16 justify-center">
+    <div className="flex flex-col">
       <DeepAudio />
     </div>
   );
