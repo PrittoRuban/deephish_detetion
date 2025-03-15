@@ -28,7 +28,8 @@ export default function RootLayout({ children }) {
       >
         <ThemeContextProvider>
           <Navbar />
-          {children}
+          <div className="min-h-screen pt-12 sm:pt-20">
+          {children}</div>
           <ThemeSwitch />
         </ThemeContextProvider>
       </body>
