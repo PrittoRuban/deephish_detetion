@@ -11,6 +11,7 @@ import {
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Shield } from "lucide-react";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = React.useState(false);
@@ -62,10 +63,10 @@ export function Navbar() {
               className="text-foreground hover:text-foreground/80 transition-colors flex items-center gap-2 shrink-0"
             >
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary/90 to-primary-foreground/90 flex items-center justify-center shadow-lg shadow-primary/20">
-                <IconHome className="h-4 w-4 text-background" />
+                <Shield className="h-4 w-4 text-background" />
               </div>
               <span className="text-sm font-semibold transition-opacity duration-300 md:block hidden">
-                Security Scanner
+                Secure One
               </span>
             </Link>
 

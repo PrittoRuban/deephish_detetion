@@ -3,6 +3,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import ThemeContextProvider from "@/context/theme-context";
 import ThemeSwitch from "@/components/ui/theme-switch";
+import { Footer } from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,8 +29,8 @@ export default function RootLayout({ children }) {
       >
         <ThemeContextProvider>
           <Navbar />
-          <div className="min-h-screen pt-12 sm:pt-20">
-          {children}</div>
+          <div className="min-h-screen pt-12 sm:pt-20">{children}</div>
+          <Footer />
           <ThemeSwitch />
         </ThemeContextProvider>
       </body>

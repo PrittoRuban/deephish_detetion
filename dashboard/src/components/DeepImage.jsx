@@ -72,6 +72,10 @@ const DeepImage = () => {
         <h1 className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-6">
           Deepfake Image Detector
         </h1>
+        <p className="text-gray-700 dark:text-gray-400 mb-12">
+          Upload your image file and our AI will analyze it for potential
+          manipulation.
+        </p>
 
         {/* Drag and drop or upload area */}
         <div
