@@ -1,6 +1,13 @@
 "use client";
-import React, { useState, useCallback } from "react";
-import { Upload } from "lucide-react";
+import React, { useState, useCallback, useRef } from "react";
+import {
+  Upload,
+  Image as ImageIcon,
+  AlertCircle,
+  CheckCircle2,
+  Loader2,
+  BarChart2,
+} from "lucide-react";
 
 const DeepImage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -8,6 +15,8 @@ const DeepImage = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [result, setResult] = useState(null);
   const [previewURL, setPreviewURL] = useState(null);
+  const [error, setError] = useState(null);
+  const fileInputRef = useRef(null);
 
   const handleDragOver = useCallback((e) => {
     e.preventDefault();
@@ -22,26 +31,51 @@ const DeepImage = () => {
   const handleDrop = useCallback((e) => {
     e.preventDefault();
     setIsDragging(false);
-    const file = e.dataTransfer.files[0];
-    if (file && file.type.startsWith("image/")) {
-      setSelectedFile(file);
-      setPreviewURL(URL.createObjectURL(file));
-    }
+    handleImageFile(e.dataTransfer.files[0]);
   }, []);
 
   const handleFileSelect = useCallback((e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-      setPreviewURL(URL.createObjectURL(file));
-    }
+    handleImageFile(e.target.files?.[0]);
   }, []);
 
+  const handleImageFile = (file) => {
+    setError(null);
+    setResult(null);
+
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setError("Please upload an image file (PNG, JPG, JPEG, GIF)");
+      return;
+    }
+
+    // Size validation (10MB limit)
+    if (file.size > 10 * 1024 * 1024) {
+      setError("File size exceeds 10MB limit");
+      return;
+    }
+
+    setSelectedFile(file);
+    setPreviewURL(URL.createObjectURL(file));
+  };
+
+  const resetForm = () => {
+    setSelectedFile(null);
+    setPreviewURL(null);
+    setResult(null);
+    setError(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
   const handleDetect = useCallback(async () => {
-    if (!selectedFile) return;
+    if (!selectedFile) {
+      setError("Please select an image first");
+      return;
+    }
 
     setIsProcessing(true);
     setResult(null);
+    setError(null);
 
     const formData = new FormData();
     formData.append("image", selectedFile);
@@ -56,122 +90,247 @@ const DeepImage = () => {
       if (response.ok) {
         setResult(data.prediction);
       } else {
-        setResult({ error: data.error || "Failed to process image." });
+        setError(data.error || "Failed to process image.");
       }
-    } catch (error) {
-      console.error("Error:", error);
-      setResult({ error: "Error processing request." });
+    } catch (err) {
+      console.error("Error:", err);
+      setError("Error processing request. Please try again.");
     } finally {
       setIsProcessing(false);
     }
   }, [selectedFile]);
 
-  return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-200 px-6">
-      <div className="max-w-4xl mx-auto text-center">
-        <h1 className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-6">
-          Deepfake Image Detector
-        </h1>
-        <p className="text-gray-700 dark:text-gray-400 mb-12">
-          Upload your image file and our AI will analyze it for potential
-          manipulation.
-        </p>
+  // Helper to format confidence percentages
+  const formatConfidence = (value) => {
+    return (parseFloat(value) * 100).toFixed(1) + "%";
+  };
 
-        {/* Drag and drop or upload area */}
-        <div
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-          className={`border-2 border-dashed rounded-2xl p-12 cursor-pointer transition-all 
-            ${
-              isDragging
-                ? "border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-900"
-                : "border-gray-300 bg-gray-100 dark:border-gray-700 dark:bg-gray-800"
-            }`}
-        >
-          <Upload className="mx-auto h-12 w-12 text-gray-400" />
-          <p className="mt-4 text-lg">
-            Drag & drop your image here or{" "}
-            <label className="text-blue-500 cursor-pointer hover:underline">
-              select a file
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-200 px-6 pb-20">
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text">
+            DeepFake Image Detector
+          </h1>
+          <p className="text-lg text-gray-700 dark:text-gray-300">
+            Upload your image and our AI will analyze it for signs of
+            manipulation
+          </p>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+          <div className="space-y-6">
+            {/* File upload area */}
+            <div
+              className={`relative rounded-xl border-2 border-dashed transition-all duration-200 cursor-pointer group ${
+                isDragging
+                  ? "bg-blue-500/10 border-blue-500"
+                  : error
+                  ? "bg-red-500/5 border-red-300 dark:border-red-500/40"
+                  : selectedFile
+                  ? "bg-emerald-500/5 border-emerald-300 dark:border-emerald-500/40"
+                  : "bg-gray-50 dark:bg-gray-900/40 border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700/30"
+              }`}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              onClick={() => fileInputRef.current?.click()}
+            >
+              <div className="p-8 text-center">
+                {isProcessing ? (
+                  <Loader2 className="w-16 h-16 mx-auto text-blue-500 animate-spin" />
+                ) : previewURL ? (
+                  <div className="flex flex-col items-center">
+                    <div className="relative w-32 h-32 mb-4 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
+                      <img
+                        src={previewURL}
+                        alt="Preview"
+                        className="w-full h-full object-cover"
+                        onError={() => setError("Error loading image preview")}
+                      />
+                    </div>
+                  </div>
+                ) : error ? (
+                  <AlertCircle className="w-16 h-16 mx-auto text-red-500" />
+                ) : (
+                  <ImageIcon className="w-16 h-16 mx-auto text-blue-500 group-hover:scale-110 transition-transform" />
+                )}
+
+                <p className="text-lg mt-4 font-medium">
+                  {selectedFile ? (
+                    <span className="truncate max-w-full block">
+                      {selectedFile.name}
+                    </span>
+                  ) : error ? (
+                    <span className="text-red-500">{error}</span>
+                  ) : (
+                    <span>
+                      Drag & drop your image here or{" "}
+                      <span className="text-blue-500 dark:text-blue-400 font-semibold">
+                        Browse
+                      </span>
+                    </span>
+                  )}
+                </p>
+
+                {selectedFile && (
+                  <p className="text-sm text-gray-500 mt-2">
+                    {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
+                  </p>
+                )}
+
+                {!selectedFile && !error && (
+                  <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                    Supported formats: PNG, JPG, JPEG, GIF
+                  </p>
+                )}
+              </div>
+
               <input
+                ref={fileInputRef}
                 type="file"
                 className="hidden"
                 accept="image/*"
                 onChange={handleFileSelect}
               />
-            </label>
-          </p>
-          <p className="mt-2 text-sm text-gray-500">
-            Supported formats: PNG, JPG, JPEG, GIF
-          </p>
-        </div>
+            </div>
 
-        {/* Image Preview */}
-        {previewURL && (
-          <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-xl">
-            <img
-              src={previewURL}
-              alt="Selected preview"
-              className="w-48 h-48 mx-auto object-cover rounded-lg border border-gray-300 dark:border-gray-700"
-            />
-            <p className="mt-2 text-sm text-gray-800 dark:text-gray-200">
-              Selected file: <strong>{selectedFile.name}</strong>
-            </p>
+            {/* Action buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-2">
+              <button
+                onClick={handleDetect}
+                disabled={isProcessing || !selectedFile}
+                className={`flex-1 py-3 px-6 rounded-lg text-white font-medium flex items-center justify-center gap-2 transition-all ${
+                  !selectedFile
+                    ? "bg-blue-400 cursor-not-allowed opacity-60"
+                    : isProcessing
+                    ? "bg-blue-500 cursor-wait"
+                    : "bg-blue-500 hover:bg-blue-600 hover:shadow-md"
+                }`}
+              >
+                {isProcessing ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Analyzing...
+                  </>
+                ) : (
+                  "Analyze Image"
+                )}
+              </button>
+
+              {selectedFile && (
+                <button
+                  onClick={resetForm}
+                  disabled={isProcessing}
+                  className="py-3 px-6 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors disabled:opacity-50"
+                >
+                  Reset
+                </button>
+              )}
+            </div>
           </div>
-        )}
 
-        {/* Detect button */}
-        <div className="mt-6">
-          <button
-            onClick={handleDetect}
-            disabled={!selectedFile || isProcessing}
-            className={`px-6 py-3 rounded-2xl font-medium text-white transition-colors 
-              ${
-                isProcessing
-                  ? "bg-gray-400 cursor-not-allowed dark:bg-gray-700"
-                  : "bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
+          {/* Results display */}
+          {result && (
+            <div
+              className={`mt-8 p-6 rounded-xl border ${
+                result.label === "real"
+                  ? "bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800"
+                  : "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800"
               }`}
-          >
-            {isProcessing ? "Processing..." : "Detect Deepfake"}
-          </button>
-        </div>
-
-        {/* Results Section */}
-        {result && (
-          <div className="mt-6 p-6 bg-gray-100 dark:bg-gray-900 rounded-2xl shadow-md">
-            {result.error ? (
-              <p className="text-red-500 font-medium text-lg capitalize">
-                Error: {result.error}
-              </p>
-            ) : (
-              <div>
-                <p className="text-xl font-semibold capitalize text-blue-600 dark:text-blue-400">
-                  Prediction: {result.label}
-                </p>
-                <div className="mt-3 text-md text-gray-700 dark:text-gray-300">
-                  <p className="font-medium">Confidence Scores:</p>
-                  <ul className="list-disc list-inside mt-2">
-                    {Array.isArray(result.confidences)
-                      ? result.confidences.map((item, index) => (
-                          <li key={index} className="capitalize text-lg">
-                            {item.label}:{" "}
-                            {(parseFloat(item.confidence) * 100).toFixed(2)}%
-                          </li>
-                        ))
-                      : Object.entries(result.confidences || {}).map(
-                          ([key, value]) => (
-                            <li key={key} className="capitalize text-lg">
-                              {key}: {(parseFloat(value) * 100).toFixed(2)}%
-                            </li>
-                          )
-                        )}
-                  </ul>
+            >
+              <div className="flex items-center mb-4">
+                {result.label === "real" ? (
+                  <CheckCircle2 className="w-8 h-8 text-green-500 mr-3 flex-shrink-0" />
+                ) : (
+                  <AlertCircle className="w-8 h-8 text-red-500 mr-3 flex-shrink-0" />
+                )}
+                <div>
+                  <h2 className="text-xl font-bold capitalize">
+                    {result.label === "real"
+                      ? "Authentic Image"
+                      : "Manipulated Image Detected"}
+                  </h2>
+                  <p
+                    className={`text-sm mt-1 ${
+                      result.label === "real"
+                        ? "text-green-700 dark:text-green-300"
+                        : "text-red-700 dark:text-red-300"
+                    }`}
+                  >
+                    Our AI suggests this image is{" "}
+                    {result.label === "real"
+                      ? "likely real"
+                      : "possibly manipulated"}
+                  </p>
                 </div>
               </div>
-            )}
-          </div>
-        )}
+
+              {/* Confidence scores */}
+              <div className="mt-5">
+                <div className="flex items-center mb-2">
+                  <BarChart2 className="w-5 h-5 mr-2 text-gray-500" />
+                  <h3 className="font-medium text-gray-800 dark:text-gray-200">
+                    Confidence Scores
+                  </h3>
+                </div>
+
+                <div className="space-y-3 mt-3">
+                  {result.confidences &&
+                    result.confidences.map((item, index) => {
+                      const confidence = parseFloat(item.confidence);
+                      const percentage = confidence * 100;
+
+                      return (
+                        <div key={index} className="space-y-1">
+                          <div className="flex justify-between text-sm">
+                            <span className="font-medium capitalize">
+                              {item.label}
+                            </span>
+                            <span>{formatConfidence(confidence)}</span>
+                          </div>
+                          <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                            <div
+                              className={`h-full rounded-full ${
+                                item.label === "real"
+                                  ? "bg-green-500"
+                                  : "bg-red-500"
+                              }`}
+                              style={{ width: `${percentage}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div>
+              </div>
+
+              <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
+                <p className="italic">
+                  {result.label === "real"
+                    ? "Based on our analysis, this image appears to be authentic."
+                    : "Our AI has detected patterns consistent with AI-generated or manipulated images."}
+                </p>
+              </div>
+            </div>
+          )}
+
+          {error && !isDragging && (
+            <div className="mt-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+              <p className="text-red-700 dark:text-red-300 flex items-center">
+                <AlertCircle className="w-5 h-5 mr-2 flex-shrink-0" />
+                {error}
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
+          <p>
+            This tool uses AI to detect potential image manipulation. Results
+            are not guaranteed to be 100% accurate.
+          </p>
+        </div>
       </div>
     </div>
   );
