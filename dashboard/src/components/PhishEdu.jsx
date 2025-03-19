@@ -170,7 +170,7 @@ export function PhishingEducationSection() {
       title: "Phishing Awareness Training",
       description: "Comprehensive training on phishing awareness.",
       duration: "Varies",
-      thumbnail: "https://img.youtube.com/vi/3GBmpqhQI8s/0.jpg",
+      thumbnail: "https://img.youtube.com/vi/UIJ708Wrig4/0.jpg",
       source: "YouTube",
       tags: ["Educational", "Security"],
       videoUrl:

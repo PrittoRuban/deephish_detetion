@@ -161,6 +161,17 @@ export function DeepfakeEducationSection() {
       tags: ["Political", "Awareness"],
       videoUrl: "https://www.youtube.com/watch?v=B4jNttRvbpU",
     },
+    {
+      id: 6,
+      title: "Detection and Generation of Deep Fakes",
+      description:
+        "Dr. Peter Eisert discusses techniques for creating and identifying deepfakes.",
+      duration: "1:02:15",
+      thumbnail: "https://img.youtube.com/vi/YvTbHyw7jx0/0.jpg",
+      source: "IEEE Signal Processing Society",
+      tags: ["Deepfakes", "Detection", "Generation"],
+      videoUrl: "https://www.youtube.com/watch?v=YvTbHyw7jx0",
+    },
   ];
 
   const caseStudies = [
