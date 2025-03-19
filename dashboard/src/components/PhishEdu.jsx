@@ -18,10 +18,14 @@ import {
   TrendingUp,
   MessageSquare,
   X,
+  Mail,
+  Smartphone,
+  Globe,
+  User,
 } from "lucide-react";
 import ReactPlayer from "react-player";
 
-export function DeepfakeEducationSection() {
+export function PhishingEducationSection() {
   const [activeTab, setActiveTab] = useState("what");
   const [expandedVideo, setExpandedVideo] = useState(null);
   const [expandedCase, setExpandedCase] = useState(null);
@@ -85,7 +89,7 @@ export function DeepfakeEducationSection() {
   const tabs = [
     {
       id: "what",
-      label: "What are Deepfakes?",
+      label: "What is Phishing?",
       icon: <Info className="w-5 h-5" />,
     },
     {
@@ -108,119 +112,131 @@ export function DeepfakeEducationSection() {
   const awarenessVideos = [
     {
       id: 1,
-      title: "Understanding the Surge in Deepfake Attempts",
+      title: "Recognize and Report Phishing",
       description:
-        "Explore the alarming growth of deepfake attempts and their impact over the last 3 years.",
-      duration: "5:12",
-      thumbnail: "https://img.youtube.com/vi/KYJ6w0_Gbpo/0.jpg",
-      source: "CBS News",
-      tags: ["Educational", "Technology"],
-      videoUrl: "https://www.youtube.com/watch?v=KYJ6w0_Gbpo",
+        "Learn how to identify phishing attempts and the steps to report them effectively.",
+      duration: "2:01",
+      thumbnail: "https://img.youtube.com/vi/JlQovysQBn0/0.jpg",
+      source: "YouTube",
+      tags: ["Educational", "Security"],
+      videoUrl: "https://www.youtube.com/watch?v=JlQovysQBn0",
     },
     {
       id: 2,
-      title: "Exploring Deepfake Phishing Threats",
+      title: "Protect Yourself from Phishing",
       description:
-        "An overview of how deepfakes are used in phishing scams and social engineering attacks.",
-      duration: "4:50",
-      thumbnail: "https://img.youtube.com/vi/Ap2dxzl7PSw/0.jpg",
-      source: "Keepnet Labs",
-      tags: ["Security", "Phishing"],
-      videoUrl: "https://www.youtube.com/watch?v=Ap2dxzl7PSw",
+        "Understand the tactics used in phishing scams and how to safeguard your personal information.",
+      duration: "1:48",
+      thumbnail: "https://img.youtube.com/vi/gbsPwpd5UAU/0.jpg",
+      source: "YouTube",
+      tags: ["Educational", "Security"],
+      videoUrl: "https://www.youtube.com/watch?v=gbsPwpd5UAU",
     },
     {
       id: 3,
-      title: "Defending Against AI-Generated Deception",
+      title: "Phishing Training in Under 2 Minutes",
       description:
-        "Learn how to recognize and defend against AI-generated deepfake deceptions.",
-      duration: "6:32",
-      thumbnail: "https://img.youtube.com/vi/cVvJgdm19Ak/0.jpg",
-      source: "Tech Talks",
-      tags: ["Detection", "Security"],
-      videoUrl: "https://www.youtube.com/watch?v=cVvJgdm19Ak",
+        "A concise guide to recognizing and avoiding phishing attacks.",
+      duration: "1:55",
+      thumbnail: "https://img.youtube.com/vi/Wd-T8-VlmhU/0.jpg",
+      source: "YouTube",
+      tags: ["Educational", "Security"],
+      videoUrl: "https://www.youtube.com/watch?v=Wd-T8-VlmhU",
     },
     {
       id: 4,
-      title: "Preventing Deepfake Phishing Scams",
+      title: "What is Phishing?",
       description:
-        "Discover methods to identify and prevent falling victim to deepfake phishing scams.",
-      duration: "5:45",
-      thumbnail: "https://img.youtube.com/vi/njKDrkFu5Nk/0.jpg",
-      source: "Cybersecurity Hub",
-      tags: ["Phishing", "Security"],
-      videoUrl: "https://www.youtube.com/watch?v=njKDrkFu5Nk",
+        "A brief overview of phishing and how to protect yourself from such attacks.",
+      duration: "1:38",
+      thumbnail: "https://img.youtube.com/vi/3GBmpqhQI8s/0.jpg",
+      source: "YouTube",
+      tags: ["Educational", "Security"],
+      videoUrl: "https://www.youtube.com/watch?v=3GBmpqhQI8s",
     },
     {
       id: 5,
-      title: "The Impact of Deepfakes on Elections",
+      title: "How to Avoid Phishing! (We Can Secure Our World)",
       description:
-        "Investigate how deepfakes can influence public opinion and election outcomes.",
-      duration: "7:21",
-      thumbnail: "https://img.youtube.com/vi/B4jNttRvbpU/0.jpg",
-      source: "BBC News",
-      tags: ["Political", "Awareness"],
-      videoUrl: "https://www.youtube.com/watch?v=B4jNttRvbpU",
+        "A recent video highlighting methods to avoid phishing attacks.",
+      duration: "3:30",
+      thumbnail: "https://img.youtube.com/vi/sg0kQYvTlnc/0.jpg",
+      source: "YouTube",
+      tags: ["Educational", "Security"],
+      videoUrl: "https://www.youtube.com/watch?v=sg0kQYvTlnc",
+    },
+    {
+      id: 6,
+      title: "Phishing Awareness Training",
+      description: "Comprehensive training on phishing awareness.",
+      duration: "Varies",
+      thumbnail: "https://img.youtube.com/vi/3GBmpqhQI8s/0.jpg",
+      source: "YouTube",
+      tags: ["Educational", "Security"],
+      videoUrl:
+        "https://www.youtube.com/playlist?list=PLMMeMp5fhaUwf0Gua92pLpfqyI4zzhLHE",
     },
   ];
 
   const caseStudies = [
     {
       id: 1,
-      title: "Political Deepfakes in the 2023 Elections",
+      title: "Major Healthcare Provider Breach",
       summary:
-        "Analysis of synthetic videos that circulated during a national election and their impact on public discourse.",
-      impact: "Medium",
-      category: "Political",
-      outcome: "Debunked within 48 hours but reached over 2 million views",
+        "How a sophisticated phishing campaign led to the compromise of 1.2 million patient records at a national healthcare provider.",
+      impact: "High",
+      category: "Healthcare",
+      outcome: "HIPAA violations, $4.3 million in fines, class action lawsuits",
     },
     {
       id: 2,
-      title: "CEO Voice Fraud Case",
+      title: "Energy Sector Spear Phishing",
       summary:
-        "How criminals used AI voice cloning to authorize a fraudulent wire transfer of $243,000.",
+        "Targeted spear phishing attack against utility company employees nearly caused critical infrastructure disruption.",
       impact: "High",
-      category: "Financial",
+      category: "Critical Infrastructure",
       outcome:
-        "Funds partially recovered, company implemented voice verification protocols",
+        "Attack contained before operational impact, significant security overhaul implemented",
     },
     {
       id: 3,
-      title: "Celebrity Deepfake Endorsements",
+      title: "University Financial Aid Scam",
       summary:
-        "Investigation into unauthorized AI-generated celebrity endorsements for fraudulent products.",
+        "Widespread phishing campaign targeting university students redirected financial aid deposits to attacker-controlled accounts.",
       impact: "Medium",
-      category: "Commercial",
-      outcome: "Legal action by celebrities, new platform policies implemented",
+      category: "Education",
+      outcome:
+        "Over $1.2 million stolen, partial recovery through cyber insurance",
     },
   ];
 
   const protectionMethods = [
     {
-      title: "Digital Signatures",
+      title: "Email Security Gateways",
       description:
-        "Content provenance verification using cryptographic signatures to prove authenticity.",
-      icon: <Lock className="w-10 h-10" />,
+        "Advanced filtering systems that scan incoming messages for phishing indicators before delivery.",
+      icon: <Mail className="w-10 h-10" />,
       color: "from-blue-500 to-sky-500",
     },
     {
-      title: "Media Literacy",
+      title: "Security Awareness Training",
       description:
-        "Educational programs to help people critically evaluate digital content they encounter.",
-      icon: <Book className="w-10 h-10" />,
+        "Regular, scenario-based education to help users recognize and respond appropriately to phishing attempts.",
+      icon: <User className="w-10 h-10" />,
       color: "from-purple-500 to-indigo-500",
     },
     {
-      title: "Detection Tools",
+      title: "Multi-Factor Authentication",
       description:
-        "Software solutions that can identify manipulated media through AI analysis.",
-      icon: <AlertCircle className="w-10 h-10" />,
+        "Adding additional verification layers beyond passwords to prevent account compromise.",
+      icon: <Smartphone className="w-10 h-10" />,
       color: "from-amber-500 to-orange-500",
     },
     {
-      title: "Verification Platforms",
+      title: "Web Filtering & DNS Protection",
       description:
-        "Third-party services that authenticate important media before distribution.",
-      icon: <Link className="w-10 h-10" />,
+        "Blocking malicious sites and domains that are linked in phishing messages.",
+      icon: <Globe className="w-10 h-10" />,
       color: "from-emerald-500 to-green-500",
     },
   ];
@@ -235,11 +251,11 @@ export function DeepfakeEducationSection() {
       >
         <motion.div variants={itemVariants}>
           <h2 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-neutral-900 to-neutral-700 dark:from-white dark:to-neutral-300 py-1">
-            Understanding Deepfakes
+            Understanding Phishing Attacks
           </h2>
           <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
-            Learn about synthetic media technology, its implications, and how to
-            protect yourself
+            Learn how to identify, avoid, and protect yourself from increasingly
+            sophisticated phishing attempts
           </p>
         </motion.div>
       </motion.div>
@@ -262,7 +278,7 @@ export function DeepfakeEducationSection() {
         ))}
       </div>
 
-      {/* What are Deepfakes? */}
+      {/* What is Phishing? */}
       {activeTab === "what" && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -273,65 +289,71 @@ export function DeepfakeEducationSection() {
           <div className="lg:col-span-2">
             <BackgroundGradient className="rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800 h-full">
               <div className="p-8 h-full relative">
-                <div className="absolute inset-0 opacity-10 bg-gradient-to-br from-orange-500/20 to-amber-500/20 filter blur-xl -z-10"></div>
+                <div className="absolute inset-0 opacity-10 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 filter blur-xl -z-10"></div>
 
                 <h3 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-neutral-900 to-neutral-600 dark:from-neutral-100 dark:to-neutral-300">
-                  The Technology Behind Deepfakes
+                  The Mechanics of Phishing
                 </h3>
 
                 <p className="text-neutral-700 dark:text-neutral-300 mb-4">
-                  Deepfakes are synthetic media created using deep learning
-                  algorithms, specifically generative adversarial networks
-                  (GANs) and diffusion models. These AI systems can generate
-                  realistic images, videos, and audio that appear to show real
-                  people saying or doing things they never did.
+                  Phishing is a type of social engineering attack where
+                  attackers disguise themselves as trustworthy entities to trick
+                  victims into revealing sensitive information, installing
+                  malware, or taking harmful actions. These attacks exploit
+                  human psychology rather than technical vulnerabilities.
                 </p>
 
                 <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mr-4">
-                    <TrendingUp className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                  <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-4">
+                    <TrendingUp className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-neutral-800 dark:text-neutral-200">
-                      Rapidly Evolving Technology
+                      Increasingly Sophisticated Attacks
                     </h4>
                     <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                      Deepfake quality doubles approximately every 6 months
+                      Phishing attacks have evolved from obvious scams to highly
+                      personalized, targeted campaigns
                     </p>
                   </div>
                 </div>
 
                 <h4 className="font-bold text-lg mb-2 text-neutral-800 dark:text-neutral-200">
-                  Common Applications
+                  Common Phishing Types
                 </h4>
                 <ul className="space-y-2 mb-4 text-neutral-700 dark:text-neutral-300">
                   <li className="flex items-start">
-                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 mr-2"></span>
-                    <span>Face swapping in videos and images</span>
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 mr-2"></span>
+                    <span>
+                      Email phishing - Fraudulent messages mimicking legitimate
+                      organizations
+                    </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 mr-2"></span>
-                    <span>Synthetic voice generation and cloning</span>
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 mr-2"></span>
+                    <span>
+                      Spear phishing - Targeted attacks using personal
+                      information
+                    </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 mr-2"></span>
-                    <span>Full-body puppetry and motion transfer</span>
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 mr-2"></span>
+                    <span>Smishing - SMS/text message-based phishing</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 mr-2"></span>
-                    <span>Text-to-video generation</span>
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 mr-2"></span>
+                    <span>Vishing - Voice-based phishing calls</span>
                   </li>
                 </ul>
 
                 <div className="bg-neutral-100 dark:bg-neutral-800/50 p-4 rounded-xl mb-4">
                   <h4 className="font-semibold mb-2 text-neutral-800 dark:text-neutral-200">
-                    Distinguishing Factors
+                    Recognizing Phishing Attempts
                   </h4>
                   <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                    While technology continues to improve, most deepfakes still
-                    exhibit telltale artifacts like unnatural eye movements,
-                    lighting inconsistencies, audio-visual misalignment, and
-                    blurring around facial edges.
+                    Watch for urgent requests, grammatical errors, suspicious
+                    links/attachments, requests for sensitive information, and
+                    unexpected emails or messages asking you to verify accounts.
                   </p>
                 </div>
               </div>
@@ -344,48 +366,48 @@ export function DeepfakeEducationSection() {
                 <div className="absolute inset-0 opacity-10 bg-gradient-to-br from-red-500/20 to-orange-500/20 filter blur-xl -z-10"></div>
 
                 <h3 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-neutral-900 to-neutral-600 dark:from-neutral-100 dark:to-neutral-300">
-                  Potential Risks
+                  Potential Impacts
                 </h3>
 
                 <div className="space-y-4">
                   <div className="bg-neutral-50 dark:bg-neutral-800/70 p-4 rounded-xl">
                     <h4 className="font-semibold text-neutral-800 dark:text-neutral-200 mb-1">
-                      Misinformation
-                    </h4>
-                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                      Synthetic media can be used to spread false information by
-                      creating convincing but fake statements from public
-                      figures.
-                    </p>
-                  </div>
-
-                  <div className="bg-neutral-50 dark:bg-neutral-800/70 p-4 rounded-xl">
-                    <h4 className="font-semibold text-neutral-800 dark:text-neutral-200 mb-1">
                       Identity Theft
                     </h4>
                     <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                      Voice cloning can be used for authentication bypass and
-                      financial fraud.
+                      Attackers can use stolen personal information to
+                      impersonate victims, open accounts, or make fraudulent
+                      purchases.
                     </p>
                   </div>
 
                   <div className="bg-neutral-50 dark:bg-neutral-800/70 p-4 rounded-xl">
                     <h4 className="font-semibold text-neutral-800 dark:text-neutral-200 mb-1">
-                      Reputation Damage
+                      Financial Loss
                     </h4>
                     <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                      Synthetic content can be used to portray individuals in
-                      compromising situations.
+                      Direct theft from bank accounts, unauthorized charges, or
+                      fraudulent transfers.
                     </p>
                   </div>
 
                   <div className="bg-neutral-50 dark:bg-neutral-800/70 p-4 rounded-xl">
                     <h4 className="font-semibold text-neutral-800 dark:text-neutral-200 mb-1">
-                      Trust Erosion
+                      Data Breaches
                     </h4>
                     <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                      The mere existence of deepfakes can create a "liar's
-                      dividend" where authentic content is dismissed as fake.
+                      Organizational phishing can lead to system compromise and
+                      large-scale data exposure.
+                    </p>
+                  </div>
+
+                  <div className="bg-neutral-50 dark:bg-neutral-800/70 p-4 rounded-xl">
+                    <h4 className="font-semibold text-neutral-800 dark:text-neutral-200 mb-1">
+                      Malware Installation
+                    </h4>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                      Ransomware, keyloggers, and other malicious software can
+                      be deployed through phishing links or attachments.
                     </p>
                   </div>
                 </div>
@@ -599,63 +621,76 @@ export function DeepfakeEducationSection() {
                     <div className="prose prose-neutral dark:prose-invert max-w-none">
                       <h4 className="text-lg font-semibold mb-2">Background</h4>
                       <p className="text-neutral-700 dark:text-neutral-300 mb-4">
-                        {caseStudy.category === "Political" && (
+                        {caseStudy.category === "Healthcare" && (
                           <>
-                            During the 2023 elections, a series of deepfake
-                            videos appeared showing a leading candidate making
-                            controversial statements about tax policy. The
-                            videos were initially shared on social media
-                            platforms and quickly went viral before
-                            fact-checkers could respond.
+                            In 2023, a major healthcare provider with facilities
+                            across multiple states fell victim to a
+                            sophisticated phishing campaign. Attackers
+                            impersonated the company's IT department, sending
+                            emails requesting password resets due to "security
+                            concerns." The emails included the company's logo,
+                            legitimate-looking sender addresses, and convincing
+                            language that created urgency.
                           </>
                         )}
-                        {caseStudy.category === "Financial" && (
+                        {caseStudy.category === "Critical Infrastructure" && (
                           <>
-                            In early 2023, criminals used AI voice cloning
-                            technology to mimic the voice of a multinational
-                            company's CEO, convincing a financial controller to
-                            authorize an emergency wire transfer of $243,000 to
-                            a fraudulent account.
+                            Attackers conducted extensive reconnaissance on a
+                            regional utility company, gathering information
+                            about key employees from LinkedIn, social media, and
+                            company publications. They then crafted highly
+                            personalized spear phishing emails to senior
+                            engineers with specialized malware attachments
+                            disguised as industry reports.
                           </>
                         )}
-                        {caseStudy.category === "Commercial" && (
+                        {caseStudy.category === "Education" && (
                           <>
-                            Multiple celebrities discovered AI-generated
-                            versions of themselves appearing in advertisements
-                            for products they had never endorsed, including
-                            health supplements and cryptocurrency investments.
+                            During the 2023 spring semester, attackers launched
+                            a widespread phishing campaign targeting university
+                            students across multiple institutions. The campaign
+                            involved fake emails claiming to be from financial
+                            aid offices, instructing students to "verify" their
+                            direct deposit information through a convincing but
+                            fraudulent portal.
                           </>
                         )}
                       </p>
                       <h4 className="text-lg font-semibold mb-2">Analysis</h4>
                       <p className="text-neutral-700 dark:text-neutral-300 mb-4">
-                        {caseStudy.category === "Political" && (
+                        {caseStudy.category === "Healthcare" && (
                           <>
-                            Technical analysis revealed several indicators of
-                            manipulation, including inconsistent lip
-                            synchronization and unnatural facial expressions.
-                            The videos were traced to a political action group
-                            using commercially available AI tools.
+                            The attackers leveraged stolen employee credentials
+                            to move laterally through the network, eventually
+                            gaining access to patient databases. The breach went
+                            undetected for 47 days, during which time attackers
+                            exfiltrated patient data including names, addresses,
+                            Social Security numbers, and medical histories.
                           </>
                         )}
-                        {caseStudy.category === "Financial" && (
+                        {caseStudy.category === "Critical Infrastructure" && (
                           <>
-                            The fraudsters used a combination of social
-                            engineering and AI voice synthesis. They first
-                            researched the CEO's speaking style from public
-                            interviews and earnings calls, then created a
-                            convincing voice clone that matched his accent and
-                            speech patterns.
+                            The malware was designed to establish persistence
+                            and map the network, specifically searching for
+                            operational technology (OT) systems. Security
+                            researchers later determined this was part of a
+                            coordinated attempt to gain access to industrial
+                            control systems. An alert network administrator
+                            noticed unusual outbound traffic patterns,
+                            triggering the incident response plan before
+                            attackers could move from IT to OT networks.
                           </>
                         )}
-                        {caseStudy.category === "Commercial" && (
+                        {caseStudy.category === "Education" && (
                           <>
-                            The deepfakes were created using generative
-                            adversarial networks trained on publicly available
-                            footage of the celebrities. Many of the fake
-                            endorsements targeted vulnerable populations with
-                            promises of miracle health cures or unrealistic
-                            investment returns.
+                            The fake portal captured students' university login
+                            credentials and financial account information.
+                            Additionally, it redirected students to update their
+                            direct deposit information, which the attackers then
+                            changed in the actual university systems using the
+                            stolen credentials. When financial aid disbursements
+                            were made, funds were sent to attacker-controlled
+                            accounts.
                           </>
                         )}
                       </p>
@@ -663,61 +698,73 @@ export function DeepfakeEducationSection() {
                         Lessons Learned
                       </h4>
                       <ul className="list-disc pl-5 space-y-1 text-neutral-700 dark:text-neutral-300 mb-4">
-                        {caseStudy.category === "Political" && (
+                        {caseStudy.category === "Healthcare" && (
                           <>
                             <li>
-                              Rapid response teams need to be in place during
-                              sensitive periods
+                              Healthcare organizations need frequent security
+                              awareness training for all staff
                             </li>
                             <li>
-                              Cross-platform coordination is essential for
-                              effective debunking
+                              Multi-factor authentication is essential for
+                              accessing sensitive systems
                             </li>
                             <li>
-                              Digital literacy education is crucial for the
-                              public
+                              Network segmentation can limit damage from
+                              compromised credentials
                             </li>
                             <li>
-                              Content authentication systems need wider adoption
+                              Advanced email filtering and authentication
+                              protocols (DMARC/SPF) can reduce phishing success
                             </li>
                           </>
                         )}
-                        {caseStudy.category === "Financial" && (
+                        {caseStudy.category === "Critical Infrastructure" && (
                           <>
                             <li>
-                              Multi-factor authentication must include
-                              non-replicable factors
+                              Air-gapping or strict segmentation between IT and
+                              OT networks is crucial
                             </li>
                             <li>
-                              Establish verification protocols for high-value
-                              transactions
+                              Role-specific security training for engineers with
+                              system access
                             </li>
                             <li>
-                              Regular training for financial staff on emerging
-                              threats
+                              Enhanced monitoring for unusual traffic patterns
+                              and data flows
                             </li>
                             <li>
-                              Implement callback procedures through separate,
-                              secure channels
+                              Regular tabletop exercises for security incidents
+                              involving critical systems
                             </li>
                           </>
                         )}
-                        {caseStudy.category === "Commercial" && (
+                        {caseStudy.category === "Education" && (
                           <>
                             <li>
-                              Celebrities need to monitor their digital presence
-                              more actively
+                              Financial systems should require additional
+                              verification for changing payment information
                             </li>
                             <li>
-                              Platforms require better detection mechanisms
+                              Educational campaigns specific to financial aid
+                              season
+                            </li>
+                            // Continuation of the code where it left off -
+                            completing the case studies lessons learned for
+                            education category
+                            <li>
+                              Financial systems should require additional
+                              verification for changing payment information
                             </li>
                             <li>
-                              Legal frameworks need updating to address
-                              synthetic media
+                              Educational campaigns specific to financial aid
+                              season
                             </li>
                             <li>
-                              Consumer education about verification of
-                              endorsements
+                              Implement notification systems for account changes
+                            </li>
+                            <li>
+                              Partner with financial institutions to improve
+                              fraud detection
                             </li>
                           </>
                         )}
@@ -737,212 +784,161 @@ export function DeepfakeEducationSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          className="space-y-8"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {protectionMethods.map((method, index) => (
               <BackgroundGradient
                 key={index}
                 className="rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800"
               >
-                <div className="p-6 flex items-start">
+                <div className="p-6 h-full">
                   <div
-                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${method.color} flex items-center justify-center mr-4 text-white`}
+                    className={`w-16 h-16 rounded-xl bg-gradient-to-br ${method.color} mb-4 flex items-center justify-center`}
                   >
                     {method.icon}
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-2 text-neutral-800 dark:text-neutral-200">
-                      {method.title}
-                    </h3>
-                    <p className="text-neutral-600 dark:text-neutral-400">
-                      {method.description}
-                    </p>
-                  </div>
+                  <h3 className="text-xl font-bold mb-2 text-neutral-800 dark:text-neutral-200">
+                    {method.title}
+                  </h3>
+                  <p className="text-neutral-700 dark:text-neutral-300">
+                    {method.description}
+                  </p>
                 </div>
               </BackgroundGradient>
             ))}
           </div>
-          <div className="mb-8">
-            <BackgroundGradient className="rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800">
-              <div className="p-8">
-                <h3 className="text-2xl font-bold mb-4 text-neutral-800 dark:text-neutral-200">
-                  Best Practices for Individuals
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-neutral-50 dark:bg-neutral-800/50 p-4 rounded-xl">
-                    <h4 className="font-semibold mb-2 text-neutral-800 dark:text-neutral-200 flex items-center">
-                      <AlertCircle className="w-4 h-4 mr-2 text-red-500" />
-                      Verify Before You Trust
-                    </h4>
-                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                      Cross-check information through multiple credible sources
-                      before accepting sensational or unusual content as
-                      authentic.
-                    </p>
-                  </div>
-                  <div className="bg-neutral-50 dark:bg-neutral-800/50 p-4 rounded-xl">
-                    <h4 className="font-semibold mb-2 text-neutral-800 dark:text-neutral-200 flex items-center">
-                      <Shield className="w-4 h-4 mr-2 text-blue-500" />
-                      Strengthen Authentication
-                    </h4>
-                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                      Use multi-factor authentication that includes biometric
-                      verification or hardware security keys for sensitive
-                      accounts.
-                    </p>
-                  </div>
-                  <div className="bg-neutral-50 dark:bg-neutral-800/50 p-4 rounded-xl">
-                    <h4 className="font-semibold mb-2 text-neutral-800 dark:text-neutral-200 flex items-center">
-                      <FileText className="w-4 h-4 mr-2 text-green-500" />
-                      Establish Verification Protocols
-                    </h4>
-                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                      Create personal verification questions or code words with
-                      colleagues and family members for sensitive
-                      communications.
-                    </p>
-                  </div>
-                  <div className="bg-neutral-50 dark:bg-neutral-800/50 p-4 rounded-xl">
-                    <h4 className="font-semibold mb-2 text-neutral-800 dark:text-neutral-200 flex items-center">
-                      <ExternalLink className="w-4 h-4 mr-2 text-purple-500" />
-                      Use Detection Tools
-                    </h4>
-                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                      Utilize deepfake detection services like ours before
-                      making decisions based on potentially manipulated media.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </BackgroundGradient>
-          </div>
+
           <BackgroundGradient className="rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800">
             <div className="p-8">
-              <h3 className="text-2xl font-bold mb-4 text-neutral-800 dark:text-neutral-200">
-                For Organizations
+              <h3 className="text-xl font-bold mb-4 text-neutral-800 dark:text-neutral-200">
+                Best Practices for Phishing Prevention
               </h3>
-              <div className="space-y-4">
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
                 <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-4 text-blue-600 dark:text-blue-400 shrink-0">
-                    <Shield className="w-5 h-5" />
+                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-3">
+                    <AlertCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-neutral-800 dark:text-neutral-200">
-                      Develop Crisis Response Plans
+                      Verify Before Taking Action
                     </h4>
-                    <p className="text-neutral-600 dark:text-neutral-400">
-                      Create protocols for responding to deepfake incidents that
-                      could affect your organization or leadership. Designate
-                      response teams and establish verification procedures.
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                      Always verify requests for sensitive information or urgent
+                      actions through a separate channel
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mr-4 text-green-600 dark:text-green-400 shrink-0">
-                    <Book className="w-5 h-5" />
+                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-3">
+                    <Link className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-neutral-800 dark:text-neutral-200">
-                      Educate Your Team
+                      Check Links Before Clicking
                     </h4>
-                    <p className="text-neutral-600 dark:text-neutral-400">
-                      Provide regular training on deepfake detection and
-                      verification methods. Ensure employees understand the
-                      risks and know how to identify potential synthetic media.
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                      Hover over links to view the actual URL destination and
+                      verify legitimacy
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mr-4 text-purple-600 dark:text-purple-400 shrink-0">
-                    <Lock className="w-5 h-5" />
+                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-3">
+                    <Book className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-neutral-800 dark:text-neutral-200">
-                      Implement Content Authentication
+                      Continuous Education
                     </h4>
-                    <p className="text-neutral-600 dark:text-neutral-400">
-                      Use digital signatures and content provenance solutions
-                      for official communications. Consider watermarking
-                      technology for your organization's media assets.
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                      Stay informed about the latest phishing techniques and
+                      attack vectors
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mr-4 text-amber-600 dark:text-amber-400 shrink-0">
-                    <AlertCircle className="w-5 h-5" />
+                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-3">
+                    <Lock className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-neutral-800 dark:text-neutral-200">
-                      Monitor Brand Presence
+                      Use Password Managers
                     </h4>
-                    <p className="text-neutral-600 dark:text-neutral-400">
-                      Utilize digital monitoring tools to track unauthorized
-                      appearances of your brand or executives across the web and
-                      social media platforms.
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                      Password managers help identify legitimate sites and won't
+                      autofill on fraudulent domains
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-3">
+                    <MessageSquare className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-neutral-800 dark:text-neutral-200">
+                      Report Suspicious Messages
+                    </h4>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                      Report phishing attempts to your IT department and
+                      relevant authorities
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-3">
+                    <ExternalLink className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-neutral-800 dark:text-neutral-200">
+                      Access Sites Directly
+                    </h4>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                      Navigate directly to websites instead of following email
+                      links for sensitive operations
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 bg-neutral-50 dark:bg-neutral-800/50 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700">
-                <h4 className="font-bold text-center mb-4 text-neutral-800 dark:text-neutral-200">
-                  Legal & Policy Resources
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                  <div className="flex items-center">
-                    <FileText className="w-5 h-5 mr-2 text-neutral-600 dark:text-neutral-400" />
-                    <a
-                      href="https://www.responsible.ai/a-look-at-global-deepfake-regulation-approaches/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-neutral-700 dark:text-neutral-300 hover:underline"
-                    >
-                      Deepfake Legislation Guide
-                    </a>
-                  </div>
-                  <div className="flex items-center">
-                    <FileText className="w-5 h-5 mr-2 text-neutral-600 dark:text-neutral-400" />
-                    <a
-                      href="https://www.itic.org/policy/ITI_AIContentAuthorizationPolicy_122123.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-neutral-700 dark:text-neutral-300 hover:underline"
-                    >
-                      Content Authentication Standards
-                    </a>
-                  </div>
-                  <div className="flex items-center">
-                    <FileText className="w-5 h-5 mr-2 text-neutral-600 dark:text-neutral-400" />
-                    <a
-                      href="https://media.defense.gov/2023/Sep/12/2003298925/-1/-1/0/CSI-DEEPFAKE-THREATS.PDF"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-neutral-700 dark:text-neutral-300 hover:underline"
-                    >
-                      Organizational Response Templates
-                    </a>
-                  </div>
-                  <div className="flex items-center">
-                    <FileText className="w-5 h-5 mr-2 text-neutral-600 dark:text-neutral-400" />
-                    <a
-                      href="https://www.dhs.gov/sites/default/files/2022-10/AEP%20DeepFake%20PHASE2%20FINAL%20corrected20221006.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-neutral-700 dark:text-neutral-300 hover:underline"
-                    >
-                      Platform Reporting Procedures
-                    </a>
+              <div className="mt-8 bg-neutral-50 dark:bg-neutral-800/50 p-4 rounded-xl">
+                <div className="flex items-start">
+                  <Shield className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 mr-2" />
+                  <div>
+                    <h4 className="font-semibold text-neutral-800 dark:text-neutral-200">
+                      Remember:
+                    </h4>
+                    <p className="text-neutral-700 dark:text-neutral-300">
+                      Even the most technically secure systems can be
+                      compromised through social engineering. Your awareness and
+                      skepticism are powerful defensive tools against phishing
+                      attempts.
+                    </p>
                   </div>
                 </div>
+              </div>
+
+              <div className="mt-6 flex justify-center">
+                <a
+                  href="https://www.okta.com/sites/default/files/2024-08/ultimate-guide-to-phishing-prevention.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-medium rounded-full transition-all duration-200 flex items-center"
+                >
+                  <FileText className="w-4 h-4 mr-2" />
+                  Download Phishing Prevention Guide
+                </a>
               </div>
             </div>
           </BackgroundGradient>
         </motion.div>
       )}
-
       {/* FAQ Section */}
       <motion.div
         variants={itemVariants}
@@ -956,35 +952,38 @@ export function DeepfakeEducationSection() {
         </div>
         <p className="text-neutral-600 dark:text-neutral-400 mb-2">
           <span className="font-medium text-neutral-800 dark:text-neutral-200">
-            How accurate is the detection?
+            What should I do if I suspect I've clicked on a phishing link?
           </span>{" "}
-          Our models achieve 97-99% accuracy on benchmark datasets, though
-          results may vary with real-world content.
+          Immediately change your passwords from a different device, monitor
+          your accounts for suspicious activity, and report the incident to your
+          IT department or relevant authorities.
         </p>
         <p className="text-neutral-600 dark:text-neutral-400">
           <span className="font-medium text-neutral-800 dark:text-neutral-200">
-            Is my data private?
+            Can phishing attacks target mobile devices?
           </span>{" "}
-          Yes, all uploads are analyzed securely and not stored after
-          processing. Your privacy is our priority.
+          Yes, mobile phishing (smishing) is increasingly common through SMS,
+          messaging apps, and fraudulent mobile applications. Always verify
+          requests and be cautious about clicking links on mobile devices.
         </p>
         <p className="text-neutral-600 dark:text-neutral-400 mt-2">
           <span className="font-medium text-neutral-800 dark:text-neutral-200">
-            Can I use this for commercial purposes?
+            How effective is security training against phishing?
           </span>{" "}
-          Currently our service is for personal use only. Contact us for custom
-          solutions.
+          Regular, scenario-based training can reduce phishing susceptibility by
+          50-75% when combined with simulated phishing exercises and continuous
+          awareness programs.
         </p>
       </motion.div>
 
       {/* Bottom Call To Action */}
       <motion.div variants={itemVariants} className="mt-16 text-center">
         <h3 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-neutral-900 to-neutral-700 dark:from-white dark:to-neutral-300">
-          Ready to Protect Your Digital Identity?
+          Ready to Strengthen Your Phishing Defenses?
         </h3>
         <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto mb-6">
-          Start with our deepfake detection tools and become part of the
-          solution against digital deception
+          Start with our security awareness training and assessment tools to
+          protect yourself and your organization from phishing attacks
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <button
@@ -992,16 +991,16 @@ export function DeepfakeEducationSection() {
             className="px-6 py-3 bg-neutral-900 text-white font-medium rounded-full hover:bg-neutral-800 transition-colors duration-200 flex items-center dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200"
           >
             <Shield className="w-5 h-5 mr-2" />
-            Try Our Detection Tools
+            Try Our Phishing Simulator
           </button>
           <a
-            href="https://cloud.google.com/discover/what-is-deep-learning?hl=en"
+            href="https://perception-point.io/guides/phishing/how-to-prevent-phishing-attacks/"
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-3 bg-neutral-100 text-neutral-800 font-medium rounded-full hover:bg-neutral-200 transition-colors duration-200 flex items-center dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700"
           >
             <Info className="w-5 h-5 mr-2" />
-            Learn More About Deep learning Technology
+            Learn More About Anti-Phishing Resources
           </a>
         </div>
       </motion.div>
