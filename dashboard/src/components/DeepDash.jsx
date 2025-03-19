@@ -188,39 +188,7 @@ export function DeepfakeAnalysisGrids() {
         ))}
       </motion.div>
 
-      {/* FAQ Section */}
-      <motion.div
-        variants={itemVariants}
-        className="mt-16 bg-neutral-50 dark:bg-neutral-900/50 p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800"
-      >
-        <div className="flex items-center gap-2 mb-4">
-          <MessageSquare className="w-5 h-5 text-neutral-500" />
-          <h3 className="text-lg font-semibold text-neutral-800 dark:text-neutral-200">
-            Frequently Asked Questions
-          </h3>
-        </div>
-        <p className="text-neutral-600 dark:text-neutral-400 mb-2">
-          <span className="font-medium text-neutral-800 dark:text-neutral-200">
-            How accurate is the detection?
-          </span>{" "}
-          Our models achieve 97-99% accuracy on benchmark datasets, though
-          results may vary with real-world content.
-        </p>
-        <p className="text-neutral-600 dark:text-neutral-400">
-          <span className="font-medium text-neutral-800 dark:text-neutral-200">
-            Is my data private?
-          </span>{" "}
-          Yes, all uploads are analyzed securely and not stored after
-          processing. Your privacy is our priority.
-        </p>
-        <p className="text-neutral-600 dark:text-neutral-400 mt-2">
-          <span className="font-medium text-neutral-800 dark:text-neutral-200">
-            Can I use this for commercial purposes?
-          </span>{" "}
-          Currently our service is for personal use only. Contact us for custom
-          solutions.
-        </p>
-      </motion.div>
+      
     </div>
   );
 }
