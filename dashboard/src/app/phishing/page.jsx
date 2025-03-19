@@ -1,5 +1,5 @@
-import { PhishDash } from "@/components/PhishDash";
-import { PhishingEducationSection } from "@/components/PhishEdu";
+import { PhishDash } from "@/components/phishing/PhishDash";
+import { PhishingEducationSection } from "@/components/phishing/PhishEdu";
 
 export default function Home() {
   return (

@@ -1,4 +1,4 @@
-import DeepVideo from "@/components/DeepVideo";
+import DeepVideo from "@/components/deepfake/DeepVideo";
 
 const DeepVideoAnalysis = () => {
   return (

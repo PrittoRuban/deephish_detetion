@@ -187,7 +187,7 @@ export function PhishDash() {
         ))}
       </motion.div>
 
-      {/* FAQ Section */}
+      {/* FAQ Section
       <motion.div
         variants={itemVariants}
         className="mt-16 bg-neutral-50 dark:bg-neutral-900/50 p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800"
@@ -219,7 +219,7 @@ export function PhishDash() {
           Our detection models are updated daily with new phishing patterns and
           tactics to ensure maximum protection.
         </p>
-      </motion.div>
+      </motion.div> */}
     </div>
   );
 }

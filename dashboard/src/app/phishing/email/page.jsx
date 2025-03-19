@@ -1,4 +1,4 @@
-import PhishEmail from "@/components/PhishEmail";
+import PhishEmail from "@/components/phishing/PhishEmail";
 
 const PhishEmailAnalysis = () => {
   return (

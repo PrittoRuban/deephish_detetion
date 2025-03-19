@@ -1,4 +1,4 @@
-import DeepAudio from "@/components/DeepAudio";
+import DeepAudio from "@/components/deepfake/DeepAudio";
 
 const DeepAudioAnalysis = () => {
   return (

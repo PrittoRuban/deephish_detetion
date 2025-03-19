@@ -1,4 +1,4 @@
-import DeepImage from "@/components/DeepImage";
+import DeepImage from "@/components/deepfake/DeepImage";
 
 const DeepImageAnalysis = () => {
   return (

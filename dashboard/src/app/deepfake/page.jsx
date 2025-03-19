@@ -1,5 +1,5 @@
-import { DeepfakeAnalysisGrids } from "@/components/DeepDash";
-import { DeepfakeEducationSection } from "@/components/DeepEdu";
+import { DeepfakeAnalysisGrids } from "@/components/deepfake/DeepDash";
+import { DeepfakeEducationSection } from "@/components/deepfake/DeepEdu";
 
 export default function Deepfake() {
   return (

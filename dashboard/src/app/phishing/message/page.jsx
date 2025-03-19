@@ -1,4 +1,4 @@
-import PhishMsg from "@/components/PhishMsg";
+import PhishMsg from "@/components/phishing/PhishMsg";
 
 const PhishMessageAnalysis = () => {
   return (
