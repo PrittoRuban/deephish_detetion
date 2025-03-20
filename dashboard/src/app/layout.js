@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import ThemeContextProvider from "@/context/theme-context";
 import ThemeSwitch from "@/components/ui/theme-switch";
 import { Footer } from "@/components/Footer";
+import VoiceflowChatWidget from "@/components/Chatbot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
           <Navbar />
           <div className="min-h-screen pt-12 sm:pt-20">{children}</div>
           <Footer />
+          <VoiceflowChatWidget />
           <ThemeSwitch />
         </ThemeContextProvider>
       </body>
