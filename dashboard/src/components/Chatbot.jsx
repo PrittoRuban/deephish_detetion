@@ -25,6 +25,7 @@ export default function VoiceflowChatWidget() {
         const styleEl = document.createElement("style");
         styleEl.innerHTML = `
           .vfrc-launcher-button {
+            position: fixed !important; /* Make it fixed */
             bottom: 80px !important; /* Move up to avoid theme switcher */
           }
         `;
