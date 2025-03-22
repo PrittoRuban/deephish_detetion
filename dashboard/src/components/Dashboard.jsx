@@ -12,23 +12,18 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  Radar,
   LineChart,
   Line,
   Area,
   AreaChart,
+  PieChart,
+  Pie,
+  Cell,
 } from "recharts";
 import {
   Shield,
   TrendingUp,
   Zap,
-  CheckCircle,
-  XCircle,
-  Award,
   AlertTriangle,
   Users,
   Globe,
@@ -38,10 +33,23 @@ import {
   ArrowRight,
   Star,
   Layers,
+  MessageSquare,
+  CheckCircle,
+  XCircle,
+  Check,
+  FileText,
+  BarChart as BarChartIcon,
+  Heart,
+  DollarSign,
+  ExternalLink,
+  Award,
+  LifeBuoy,
+  ThumbsUp,
+  Hash,
 } from "lucide-react";
 
 export default function Dashboard() {
-  const [activeTab, setActiveTab] = useState("accuracy");
+  const [activeTab, setActiveTab] = useState("impact");
   const [hoveredCard, setHoveredCard] = useState(null);
   const [showAnimation, setShowAnimation] = useState(false);
 
@@ -57,225 +65,217 @@ export default function Dashboard() {
     return () => clearInterval(interval);
   }, []);
 
-  // Real competitors in cybersecurity space
-  const competitors = {
-    us: "Secure One",
-    comp1: "CrowdStrike",
-    comp2: "Darktrace",
-    comp3: "SentinelOne",
-  };
+  // Historical impact data
+  const impactData = [
+    {
+      year: "2019",
+      lossesInBillions: 3.5,
+      phishingAttacks: 1.5,
+      deepfakeIncidents: 0.5,
+    },
+    {
+      year: "2020",
+      lossesInBillions: 4.2,
+      phishingAttacks: 1.8,
+      deepfakeIncidents: 0.9,
+    },
+    {
+      year: "2021",
+      lossesInBillions: 6.9,
+      phishingAttacks: 2.4,
+      deepfakeIncidents: 1.6,
+    },
+    {
+      year: "2022",
+      lossesInBillions: 8.8,
+      phishingAttacks: 3.1,
+      deepfakeIncidents: 2.7,
+    },
+    {
+      year: "2023",
+      lossesInBillions: 10.3,
+      phishingAttacks: 3.8,
+      deepfakeIncidents: 4.2,
+    },
+    {
+      year: "2024",
+      lossesInBillions: 12.7,
+      phishingAttacks: 4.5,
+      deepfakeIncidents: 5.8,
+    },
+  ];
 
-  // Model accuracy comparison data with real competitors
+  // Detection accuracy data
   const accuracyData = [
     {
-      name: "Phishing Detection",
-      [competitors.us]: 98.7,
-      [competitors.comp1]: 94.3,
-      [competitors.comp2]: 93.1,
-      [competitors.comp3]: 91.5,
+      name: "Phishing URLs",
+      accuracy: 98.7,
     },
     {
-      name: "Deepfake Image",
-      [competitors.us]: 99.2,
-      [competitors.comp1]: 95.4,
-      [competitors.comp2]: 93.8,
-      [competitors.comp3]: 92.2,
+      name: "Phishing Emails",
+      accuracy: 97.9,
     },
     {
-      name: "Deepfake Video",
-      [competitors.us]: 97.8,
-      [competitors.comp1]: 93.1,
-      [competitors.comp2]: 91.5,
-      [competitors.comp3]: 89.8,
+      name: "Deepfake Images",
+      accuracy: 99.2,
+    },
+    {
+      name: "Deepfake Videos",
+      accuracy: 97.8,
     },
     {
       name: "Deepfake Audio",
-      [competitors.us]: 98.5,
-      [competitors.comp1]: 94.2,
-      [competitors.comp2]: 92.7,
-      [competitors.comp3]: 90.3,
+      accuracy: 98.5,
     },
     {
-      name: "Email Security",
-      [competitors.us]: 99.1,
-      [competitors.comp1]: 96.7,
-      [competitors.comp2]: 94.4,
-      [competitors.comp3]: 92.9,
+      name: "Malicious Messages",
+      accuracy: 96.4,
     },
   ];
 
-  // Feature comparison data
-  const featureData = [
+  // Notable incidents data
+  const notableIncidents = [
     {
-      feature: "AI-Powered Threat Detection",
-      [competitors.us]: true,
-      [competitors.comp1]: true,
-      [competitors.comp2]: true,
-      [competitors.comp3]: true,
+      year: "2019",
+      incident: "Fake CEO audio deepfake scam",
+      cost: "$243,000",
+      organization: "UK-based energy firm",
+      type: "Audio Deepfake",
     },
     {
-      feature: "Real-time Deepfake Detection",
-      [competitors.us]: true,
-      [competitors.comp1]: false,
-      [competitors.comp2]: false,
-      [competitors.comp3]: true,
+      year: "2020",
+      incident: "Government official deepfake video",
+      cost: "Political instability",
+      organization: "Government agency",
+      type: "Video Deepfake",
     },
     {
-      feature: "Contextual AI Chatbot Support",
-      [competitors.us]: true,
-      [competitors.comp1]: false,
-      [competitors.comp2]: false,
-      [competitors.comp3]: false,
+      year: "2021",
+      incident: "Banking phishing campaign",
+      cost: "$7.8 million",
+      organization: "Multiple financial institutions",
+      type: "Phishing",
     },
     {
-      feature: "Executive Threat Briefings",
-      [competitors.us]: true,
-      [competitors.comp1]: true,
-      [competitors.comp2]: false,
-      [competitors.comp3]: false,
+      year: "2022",
+      incident: "Healthcare data breach via phishing",
+      cost: "$4.2 million + patient data",
+      organization: "Regional hospital system",
+      type: "Phishing",
     },
     {
-      feature: "Zero Trust Integration",
-      [competitors.us]: true,
-      [competitors.comp1]: true,
-      [competitors.comp2]: true,
-      [competitors.comp3]: false,
+      year: "2023",
+      incident: "Military communication deepfake",
+      cost: "National security risk",
+      organization: "Defense department",
+      type: "Audio/Video Deepfake",
     },
     {
-      feature: "Quantum-Resistant Encryption",
-      [competitors.us]: true,
-      [competitors.comp1]: false,
-      [competitors.comp2]: false,
-      [competitors.comp3]: false,
-    },
-    {
-      feature: "Free Security Assessment",
-      [competitors.us]: true,
-      [competitors.comp1]: false,
-      [competitors.comp2]: true,
-      [competitors.comp3]: false,
-    },
-    {
-      feature: "Offline Detection Mode",
-      [competitors.us]: true,
-      [competitors.comp1]: false,
-      [competitors.comp2]: false,
-      [competitors.comp3]: false,
+      year: "2024",
+      incident: "Election disinformation campaign",
+      cost: "Electoral integrity compromised",
+      organization: "Election systems",
+      type: "Multimodal Deepfakes",
     },
   ];
 
-  // Radar chart data for threat protection coverage
-  const radarData = [
-    {
-      subject: "Phishing",
-      [competitors.us]: 98,
-      [competitors.comp1]: 92,
-      [competitors.comp2]: 90,
-      [competitors.comp3]: 88,
-    },
-    {
-      subject: "Malware",
-      [competitors.us]: 96,
-      [competitors.comp1]: 94,
-      [competitors.comp2]: 91,
-      [competitors.comp3]: 90,
-    },
-    {
-      subject: "Deepfakes",
-      [competitors.us]: 98,
-      [competitors.comp1]: 86,
-      [competitors.comp2]: 84,
-      [competitors.comp3]: 79,
-    },
-    {
-      subject: "Social Engineering",
-      [competitors.us]: 95,
-      [competitors.comp1]: 87,
-      [competitors.comp2]: 85,
-      [competitors.comp3]: 81,
-    },
-    {
-      subject: "Zero-day Vulnerabilities",
-      [competitors.us]: 92,
-      [competitors.comp1]: 85,
-      [competitors.comp2]: 83,
-      [competitors.comp3]: 78,
-    },
-    {
-      subject: "Data Exfiltration",
-      [competitors.us]: 95,
-      [competitors.comp1]: 89,
-      [competitors.comp2]: 86,
-      [competitors.comp3]: 83,
-    },
+  // Sector vulnerability data
+  const sectorVulnerability = [
+    { name: "Government", value: 35 },
+    { name: "Finance", value: 25 },
+    { name: "Healthcare", value: 15 },
+    { name: "Energy", value: 12 },
+    { name: "Education", value: 8 },
+    { name: "Other", value: 5 },
   ];
 
-  // New: Historical threat trends data
-  const threatTrendsData = [
-    { month: "Jan", threats: 1243, mitigated: 1243 },
-    { month: "Feb", threats: 1528, mitigated: 1528 },
-    { month: "Mar", threats: 1842, mitigated: 1842 },
-    { month: "Apr", threats: 2105, mitigated: 2105 },
-    { month: "May", threats: 2684, mitigated: 2684 },
-    { month: "Jun", threats: 3159, mitigated: 3159 },
-    { month: "Jul", threats: 3893, mitigated: 3893 },
-    { month: "Aug", threats: 4382, mitigated: 4382 },
-    { month: "Sep", threats: 5127, mitigated: 5127 },
-    { month: "Oct", threats: 5938, mitigated: 5938 },
-    { month: "Nov", threats: 6852, mitigated: 6852 },
-    { month: "Dec", threats: 7405, mitigated: 7405 },
+  const SECTOR_COLORS = [
+    "#10b981", // Government - emerald
+    "#3b82f6", // Finance - blue
+    "#8b5cf6", // Healthcare - violet
+    "#f59e0b", // Energy - amber
+    "#ec4899", // Education - pink
+    "#6b7280", // Other - gray
   ];
 
-  // Key stats cards data - enhanced with more impressive metrics
-  const statCards = [
+  // Solution benefits
+  const solutionBenefits = [
     {
       title: "Detection Accuracy",
-      value: "99.2%",
-      change: "+4.8%",
+      value: "98.2%",
+      change: "Industry-leading",
       trend: "up",
       color: "from-emerald-500 to-teal-600",
       gradient: "bg-gradient-to-br from-emerald-500/20 to-teal-600/20",
       icon: <Shield className="w-6 h-6" />,
-      description: "Industry-leading precision",
-    },
-    {
-      title: "Threats Neutralized",
-      value: "43.8M+",
-      change: "+18.4%",
-      trend: "up",
-      color: "from-blue-600 to-indigo-600",
-      gradient: "bg-gradient-to-br from-blue-600/20 to-indigo-600/20",
-      icon: <AlertTriangle className="w-6 h-6" />,
-      description: "Global protection network",
+      description: "Average across all detection types",
     },
     {
       title: "Response Time",
       value: "84ms",
-      change: "-37ms",
+      change: "Real-time protection",
       trend: "down",
-      color: "from-violet-600 to-purple-700",
-      gradient: "bg-gradient-to-br from-violet-600/20 to-purple-700/20",
+      color: "from-blue-600 to-indigo-600",
+      gradient: "bg-gradient-to-br from-blue-600/20 to-indigo-600/20",
       icon: <Zap className="w-6 h-6" />,
-      description: "Fastest in the industry",
+      description: "Immediate threat mitigation",
     },
     {
-      title: "Client Satisfaction",
-      value: "98.7%",
-      change: "+3.2%",
+      title: "Risk Reduction",
+      value: "94%",
+      change: "Estimated reduction",
+      trend: "up",
+      color: "from-violet-600 to-purple-700",
+      gradient: "bg-gradient-to-br from-violet-600/20 to-purple-700/20",
+      icon: <TrendingUp className="w-6 h-6" />,
+      description: "Based on pilot simulations",
+    },
+    {
+      title: "Cost Savings",
+      value: "$3.4M",
+      change: "Per organization (avg)",
       trend: "up",
       color: "from-amber-500 to-orange-600",
       gradient: "bg-gradient-to-br from-amber-500/20 to-orange-600/20",
-      icon: <Users className="w-6 h-6" />,
-      description: "Based on 10K+ reviews",
+      icon: <DollarSign className="w-6 h-6" />,
+      description: "Annual estimated savings",
     },
   ];
 
-  // Customer badges
-  const customerLogos = [
-    { name: "Fortune 500", icon: <Award className="w-5 h-5 mr-2" /> },
-    { name: "Global 2000", icon: <Globe className="w-5 h-5 mr-2" /> },
-    { name: "Tech Leaders", icon: <Zap className="w-5 h-5 mr-2" /> },
-    { name: "Financial Institutions", icon: <Lock className="w-5 h-5 mr-2" /> },
+  // Solution features
+  const solutionFeatures = [
+    {
+      feature: "Phishing URL Detection Engine",
+      description: "ML-powered analysis of suspicious URLs with 98.7% accuracy",
+    },
+    {
+      feature: "Email Security Analysis",
+      description: "Deep inspection of email headers, content and attachments",
+    },
+    {
+      feature: "Deepfake Image Recognition",
+      description: "Advanced computer vision to detect manipulated images",
+    },
+    {
+      feature: "Deepfake Video Detection",
+      description: "Frame-by-frame analysis for inconsistencies and artifacts",
+    },
+    {
+      feature: "Deepfake Audio Recognition",
+      description: "Frequency analysis to identify synthetic voice patterns",
+    },
+    {
+      feature: "Interactive Security Chatbot",
+      description: "24/7 AI assistant for queries and reporting",
+    },
+    {
+      feature: "Real-time Threat Intelligence",
+      description: "Constantly updated database of emerging threats",
+    },
+    {
+      feature: "Incident Reporting System",
+      description: "Streamlined process for reporting cybersecurity incidents",
+    },
   ];
 
   // Animation variants
@@ -292,24 +292,6 @@ export default function Dashboard() {
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
-  };
-
-  const renderFeatureIcon = (value) => {
-    return value ? (
-      <CheckCircle className="w-5 h-5 text-emerald-500" />
-    ) : (
-      <XCircle className="w-5 h-5 text-red-500" />
-    );
-  };
-
-  // Enhanced tooltip styles
-  const customTooltipStyle = {
-    backgroundColor: "rgba(17, 24, 39, 0.9)",
-    border: "none",
-    borderRadius: "8px",
-    boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-    color: "#fff",
-    padding: "12px 16px",
   };
 
   // Custom tooltip component for charts
@@ -329,10 +311,14 @@ export default function Dashboard() {
                   className="w-3 h-3 rounded-full mr-2"
                   style={{ backgroundColor: entry.color }}
                 ></span>
-                <span className="font-medium">{entry.name}:</span>
+                <span className="font-medium">
+                  {entry.name || entry.dataKey}:
+                </span>
                 <span className="ml-2">
-                  {entry.value}
-                  {entry.unit || "%"}
+                  {typeof entry.value === "number" &&
+                  entry.dataKey === "lossesInBillions"
+                    ? `$${entry.value}B`
+                    : entry.value}
                 </span>
               </p>
             ))}
@@ -356,36 +342,49 @@ export default function Dashboard() {
           <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 w-full h-64 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-full filter blur-3xl"></div>
 
           <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-blue-600 dark:from-emerald-400 dark:to-blue-400 py-2">
-            Secure One Intelligence Center
+            CyberShield Intelligence Center
           </h2>
           <p className="text-lg text-neutral-700 dark:text-neutral-300 max-w-3xl mx-auto">
-            Leveraging quantum-resistant AI to set the new global standard in
-            digital threat detection
+            Advanced AI-powered solution to combat phishing and deepfake threats
+            in government and enterprise environments
           </p>
 
-          {/* Trust badges */}
+          {/* Badges */}
           <div className="flex flex-wrap items-center justify-center gap-4 mt-6">
-            {customerLogos.map((logo, idx) => (
-              <div
-                key={idx}
-                className="flex items-center bg-neutral-100 dark:bg-neutral-800 px-4 py-2 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-300"
-              >
-                {logo.icon}
-                <span>{logo.name}</span>
-              </div>
-            ))}
+            <div className="flex items-center bg-neutral-100 dark:bg-neutral-800 px-4 py-2 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-300">
+              <Shield className="w-5 h-5 mr-2" />
+              <span>Anti-Phishing</span>
+            </div>
+            <div className="flex items-center bg-neutral-100 dark:bg-neutral-800 px-4 py-2 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-300">
+              <AlertTriangle className="w-5 h-5 mr-2" />
+              <span>Deepfake Detection</span>
+            </div>
+            <div className="flex items-center bg-neutral-100 dark:bg-neutral-800 px-4 py-2 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-300">
+              <MessageSquare className="w-5 h-5 mr-2" />
+              <span>Interactive Chatbot</span>
+            </div>
+            <div className="flex items-center bg-neutral-100 dark:bg-neutral-800 px-4 py-2 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-300">
+              <Globe className="w-5 h-5 mr-2" />
+              <span>Government-Grade Security</span>
+            </div>
+          </div>
+
+          {/* Hackathon badge */}
+          <div className="mt-8 inline-flex items-center bg-gradient-to-r from-emerald-500/20 to-blue-500/20 px-6 py-3 rounded-full text-md font-medium text-neutral-800 dark:text-neutral-200 border border-emerald-100 dark:border-blue-900">
+            <Award className="w-5 h-5 mr-2 text-emerald-500" />
+            <span>Cybersecurity Innovation Hackathon 2025</span>
           </div>
         </motion.div>
       </motion.div>
 
-      {/* Stats Cards - Enhanced design */}
+      {/* Solution Benefits Cards */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate={showAnimation ? "visible" : "hidden"}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 py-12"
       >
-        {statCards.map((stat, index) => (
+        {solutionBenefits.map((stat, index) => (
           <motion.div
             key={index}
             variants={itemVariants}
@@ -415,20 +414,7 @@ export default function Dashboard() {
                     {stat.icon}
                   </div>
                   <div className="flex items-center px-3 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800">
-                    <TrendingUp
-                      className={`w-4 h-4 mr-1 ${
-                        stat.trend === "up"
-                          ? "text-emerald-500"
-                          : "text-rose-500 transform rotate-180"
-                      }`}
-                    />
-                    <span
-                      className={`text-sm font-medium ${
-                        stat.trend === "up"
-                          ? "text-emerald-500"
-                          : "text-rose-500"
-                      }`}
-                    >
+                    <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
                       {stat.change}
                     </span>
                   </div>
@@ -449,47 +435,47 @@ export default function Dashboard() {
         ))}
       </motion.div>
 
-      {/* Tab navigation - Enhanced design */}
+      {/* Tab navigation */}
       <div className="flex flex-wrap justify-center mb-8 gap-3 p-1 bg-neutral-100 dark:bg-neutral-800/50 rounded-xl my-8">
         <button
-          onClick={() => setActiveTab("accuracy")}
+          onClick={() => setActiveTab("impact")}
           className={`px-5 py-2.5 rounded-lg font-medium transition-all ${
-            activeTab === "accuracy"
+            activeTab === "impact"
               ? "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg"
               : "bg-transparent text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
           }`}
         >
-          Accuracy Comparison
+          Threat Impact
         </button>
         <button
-          onClick={() => setActiveTab("coverage")}
+          onClick={() => setActiveTab("incidents")}
           className={`px-5 py-2.5 rounded-lg font-medium transition-all ${
-            activeTab === "coverage"
+            activeTab === "incidents"
               ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg"
               : "bg-transparent text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
           }`}
         >
-          Threat Coverage
+          Notable Incidents
         </button>
         <button
-          onClick={() => setActiveTab("features")}
+          onClick={() => setActiveTab("solution")}
           className={`px-5 py-2.5 rounded-lg font-medium transition-all ${
-            activeTab === "features"
+            activeTab === "solution"
               ? "bg-gradient-to-r from-violet-500 to-violet-600 text-white shadow-lg"
               : "bg-transparent text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
           }`}
         >
-          Feature Comparison
+          Our Solution
         </button>
         <button
-          onClick={() => setActiveTab("trends")}
+          onClick={() => setActiveTab("chatbot")}
           className={`px-5 py-2.5 rounded-lg font-medium transition-all ${
-            activeTab === "trends"
+            activeTab === "chatbot"
               ? "bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg"
               : "bg-transparent text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
           }`}
         >
-          Threat Trends
+          Interactive Chatbot
         </button>
       </div>
 
@@ -503,409 +489,766 @@ export default function Dashboard() {
           transition={{ duration: 0.3 }}
           className="p-6 bg-white dark:bg-neutral-900 rounded-2xl shadow-xl border border-neutral-200 dark:border-neutral-800"
         >
-          {activeTab === "accuracy" && (
-            <div className="h-96">
+          {activeTab === "impact" && (
+            <div>
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-xl font-bold text-neutral-800 dark:text-neutral-200 flex items-center">
-                  <Shield className="w-6 h-6 mr-2 text-emerald-500" />
-                  Detection Accuracy Comparison
+                  <AlertTriangle className="w-6 h-6 mr-2 text-emerald-500" />
+                  Financial Impact of Cyber Attacks
                 </h3>
                 <div className="bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 px-3 py-1 rounded-full text-sm font-medium flex items-center">
-                  <Star className="w-4 h-4 mr-1" />
-                  Industry Leading
+                  <TrendingUp className="w-4 h-4 mr-1" />
+                  Increasing Threat Level
                 </div>
               </div>
 
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={accuracyData}
-                  margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-                  barGap={2}
-                  barSize={28}
-                >
-                  <defs>
-                    <linearGradient id="colorUs" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#10b981" stopOpacity={1} />
-                      <stop offset="100%" stopColor="#059669" stopOpacity={1} />
-                    </linearGradient>
-                    <linearGradient id="colorComp1" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#3b82f6" stopOpacity={1} />
-                      <stop offset="100%" stopColor="#2563eb" stopOpacity={1} />
-                    </linearGradient>
-                    <linearGradient id="colorComp2" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#8b5cf6" stopOpacity={1} />
-                      <stop offset="100%" stopColor="#7c3aed" stopOpacity={1} />
-                    </linearGradient>
-                    <linearGradient id="colorComp3" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#f59e0b" stopOpacity={1} />
-                      <stop offset="100%" stopColor="#d97706" stopOpacity={1} />
-                    </linearGradient>
-                  </defs>
-                  <CartesianGrid
-                    strokeDasharray="3 3"
-                    opacity={0.1}
-                    vertical={false}
-                  />
-                  <XAxis
-                    dataKey="name"
-                    tick={{ fill: "currentColor" }}
-                    axisLine={{ stroke: "#d1d5db" }}
-                    tickLine={{ stroke: "#d1d5db" }}
-                  />
-                  <YAxis
-                    domain={[85, 100]}
-                    tick={{ fill: "currentColor" }}
-                    axisLine={{ stroke: "#d1d5db" }}
-                    tickLine={{ stroke: "#d1d5db" }}
-                    label={{
-                      value: "Accuracy (%)",
-                      angle: -90,
-                      position: "insideLeft",
-                      style: { textAnchor: "middle", fill: "currentColor" },
-                    }}
-                  />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Legend
-                    wrapperStyle={{ paddingTop: "10px" }}
-                    iconType="circle"
-                  />
-                  <Bar
-                    dataKey={competitors.us}
-                    name="Secure One"
-                    fill="url(#colorUs)"
-                    radius={[4, 4, 0, 0]}
-                    animationDuration={1500}
-                  />
-                  <Bar
-                    dataKey={competitors.comp1}
-                    name="CrowdStrike"
-                    fill="url(#colorComp1)"
-                    radius={[4, 4, 0, 0]}
-                    animationDuration={1500}
-                    animationBegin={300}
-                  />
-                  <Bar
-                    dataKey={competitors.comp2}
-                    name="Darktrace"
-                    fill="url(#colorComp2)"
-                    radius={[4, 4, 0, 0]}
-                    animationDuration={1500}
-                    animationBegin={600}
-                  />
-                  <Bar
-                    dataKey={competitors.comp3}
-                    name="SentinelOne"
-                    fill="url(#colorComp3)"
-                    radius={[4, 4, 0, 0]}
-                    animationDuration={1500}
-                    animationBegin={900}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
+              <div className="h-80">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart
+                    data={impactData}
+                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                  >
+                    <defs>
+                      <linearGradient
+                        id="colorLosses"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
+                        <stop
+                          offset="5%"
+                          stopColor="#ef4444"
+                          stopOpacity={0.8}
+                        />
+                        <stop
+                          offset="95%"
+                          stopColor="#ef4444"
+                          stopOpacity={0}
+                        />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid
+                      strokeDasharray="3 3"
+                      opacity={0.1}
+                      vertical={false}
+                    />
+                    <XAxis
+                      dataKey="year"
+                      tick={{ fill: "currentColor" }}
+                      axisLine={{ stroke: "#d1d5db" }}
+                      tickLine={{ stroke: "#d1d5db" }}
+                    />
+                    <YAxis
+                      tick={{ fill: "currentColor" }}
+                      axisLine={{ stroke: "#d1d5db" }}
+                      tickLine={{ stroke: "#d1d5db" }}
+                      label={{
+                        value: "Losses (Billions $)",
+                        angle: -90,
+                        position: "insideLeft",
+                        style: { textAnchor: "middle", fill: "currentColor" },
+                      }}
+                    />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Area
+                      type="monotone"
+                      dataKey="lossesInBillions"
+                      name="Financial Losses"
+                      stroke="#ef4444"
+                      fillOpacity={1}
+                      fill="url(#colorLosses)"
+                      strokeWidth={2}
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                <div className="h-60">
+                  <h4 className="text-lg font-semibold mb-4 text-neutral-800 dark:text-neutral-200 flex items-center">
+                    <Lock className="w-5 h-5 mr-2 text-blue-500" />
+                    Attack Volume Trends
+                  </h4>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart
+                      data={impactData}
+                      margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
+                      <XAxis
+                        dataKey="year"
+                        tick={{ fill: "currentColor" }}
+                        axisLine={{ stroke: "#d1d5db" }}
+                      />
+                      <YAxis
+                        tick={{ fill: "currentColor" }}
+                        axisLine={{ stroke: "#d1d5db" }}
+                      />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Legend />
+                      <Line
+                        type="monotone"
+                        dataKey="phishingAttacks"
+                        name="Phishing Attacks (Millions)"
+                        stroke="#3b82f6"
+                        activeDot={{ r: 8 }}
+                        strokeWidth={2}
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="deepfakeIncidents"
+                        name="Deepfake Incidents (Millions)"
+                        stroke="#8b5cf6"
+                        strokeWidth={2}
+                      />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+
+                <div className="h-60">
+                  <h4 className="text-lg font-semibold mb-4 text-neutral-800 dark:text-neutral-200 flex items-center">
+                    <Globe className="w-5 h-5 mr-2 text-violet-500" />
+                    Vulnerable Sectors
+                  </h4>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={sectorVulnerability}
+                        cx="50%"
+                        cy="50%"
+                        labelLine={false}
+                        outerRadius={80}
+                        fill="#8884d8"
+                        dataKey="value"
+                        label={({ name, percent }) =>
+                          `${name}: ${(percent * 100).toFixed(0)}%`
+                        }
+                      >
+                        {sectorVulnerability.map((entry, index) => (
+                          <Cell
+                            key={`cell-${index}`}
+                            fill={SECTOR_COLORS[index % SECTOR_COLORS.length]}
+                          />
+                        ))}
+                      </Pie>
+                      <Tooltip content={<CustomTooltip />} />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+
+              <div className="mt-8 bg-neutral-50 dark:bg-neutral-800/40 rounded-xl p-6">
+                <h4 className="text-lg font-semibold mb-4 text-neutral-800 dark:text-neutral-200 flex items-center">
+                  <Activity className="w-5 h-5 mr-2 text-emerald-500" />
+                  Detection Accuracy
+                </h4>
+                <div className="h-60">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart
+                      data={accuracyData}
+                      margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
+                      <XAxis
+                        dataKey="name"
+                        tick={{ fill: "currentColor" }}
+                        axisLine={{ stroke: "#d1d5db" }}
+                      />
+                      <YAxis
+                        tick={{ fill: "currentColor" }}
+                        axisLine={{ stroke: "#d1d5db" }}
+                        domain={[90, 100]}
+                        label={{
+                          value: "Accuracy (%)",
+                          angle: -90,
+                          position: "insideLeft",
+                          style: { textAnchor: "middle", fill: "currentColor" },
+                        }}
+                      />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Bar
+                        dataKey="accuracy"
+                        name="Detection Accuracy"
+                        fill="#10b981"
+                        radius={[4, 4, 0, 0]}
+                      />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
             </div>
           )}
 
-          {activeTab === "coverage" && (
-            <div className="h-96">
+          {activeTab === "incidents" && (
+            <div>
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-xl font-bold text-neutral-800 dark:text-neutral-200 flex items-center">
-                  <Lock className="w-6 h-6 mr-2 text-blue-500" />
-                  Threat Protection Coverage
+                  <AlertTriangle className="w-6 h-6 mr-2 text-blue-500" />
+                  Notable Cybersecurity Incidents
                 </h3>
-                <div className="bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 px-3 py-1 rounded-full text-sm font-medium flex items-center">
-                  <Activity className="w-4 h-4 mr-1" />
-                  360° Protection
-                </div>
               </div>
 
-              <ResponsiveContainer width="100%" height="100%">
-                <RadarChart
-                  outerRadius={150}
-                  width={600}
-                  height={400}
-                  data={radarData}
-                >
-                  <defs>
-                    <filter
-                      id="glow"
-                      height="300%"
-                      width="300%"
-                      x="-100%"
-                      y="-100%"
-                    >
-                      <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
-                      <feMerge>
-                        <feMergeNode in="coloredBlur" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
-                  </defs>
-                  <PolarGrid stroke="#d1d5db" strokeDasharray="3 3" />
-                  <PolarAngleAxis
-                    dataKey="subject"
-                    tick={{ fill: "currentColor", fontSize: 12 }}
-                    stroke="#d1d5db"
-                  />
-                  <PolarRadiusAxis
-                    angle={30}
-                    domain={[0, 100]}
-                    tick={{ fill: "currentColor" }}
-                    stroke="#d1d5db"
-                  />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Radar
-                    name="Secure One"
-                    dataKey={competitors.us}
-                    stroke="#10b981"
-                    fill="#10b981"
-                    fillOpacity={0.6}
-                    filter="url(#glow)"
-                    strokeWidth={2}
-                  />
-                  <Radar
-                    name="CrowdStrike"
-                    dataKey={competitors.comp1}
-                    stroke="#3b82f6"
-                    fill="#3b82f6"
-                    fillOpacity={0.4}
-                  />
-                  <Radar
-                    name="Darktrace"
-                    dataKey={competitors.comp2}
-                    stroke="#8b5cf6"
-                    fill="#8b5cf6"
-                    fillOpacity={0.4}
-                  />
-                  <Radar
-                    name="SentinelOne"
-                    dataKey={competitors.comp3}
-                    stroke="#f59e0b"
-                    fill="#f59e0b"
-                    fillOpacity={0.4}
-                  />
-                  <Legend
-                    iconType="circle"
-                    wrapperStyle={{ paddingTop: "15px" }}
-                  />
-                </RadarChart>
-              </ResponsiveContainer>
-            </div>
-          )}
-
-          {activeTab === "features" && (
-            <div className="overflow-x-auto">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-xl font-bold text-neutral-800 dark:text-neutral-200 flex items-center">
-                  <Layers className="w-6 h-6 mr-2 text-violet-500" />
-                  Advanced Feature Comparison
-                </h3>
-                <div className="bg-violet-50 dark:bg-violet-900/20 text-violet-700 dark:text-violet-400 px-3 py-1 rounded-full text-sm font-medium flex items-center">
-                  <Award className="w-4 h-4 mr-1" />
-                  Market Leader
-                </div>
-              </div>
-
-              <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-xl p-4 mb-6">
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                  Secure One offers next-generation security features that are
-                  unavailable in other solutions, including quantum-resistant
-                  encryption and specialized AI for deepfake detection.
-                </p>
-              </div>
-
-              <table className="min-w-full divide-y divide-neutral-200 dark:divide-neutral-700 rounded-lg overflow-hidden">
-                <thead className="bg-neutral-50 dark:bg-neutral-800/50">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
-                      Feature
-                    </th>
-                    <th className="px-6 py-4 text-center text-xs font-medium text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
-                      Secure One
-                    </th>
-                    <th className="px-6 py-4 text-center text-xs font-medium text-blue-600 dark:text-blue-400 uppercase tracking-wider">
-                      CrowdStrike
-                    </th>
-                    <th className="px-6 py-4 text-center text-xs font-medium text-violet-600 dark:text-violet-400 uppercase tracking-wider">
-                      Darktrace
-                    </th>
-                    <th className="px-6 py-4 text-center text-xs font-medium text-amber-600 dark:text-amber-400 uppercase tracking-wider">
-                      SentinelOne
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white dark:bg-neutral-900 divide-y divide-neutral-200 dark:divide-neutral-800">
-                  {featureData.map((row, index) => (
-                    <tr
-                      key={index}
-                      className="hover:bg-neutral-50 dark:hover:bg-neutral-800/60"
-                    >
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-neutral-800 dark:text-neutral-200">
-                        {row.feature}
-                      </td>
-                      <td className="px-6 py-4 text-center">
-                        {renderFeatureIcon(row[competitors.us])}
-                      </td>
-                      <td className="px-6 py-4 text-center">
-                        {renderFeatureIcon(row[competitors.comp1])}
-                      </td>
-                      <td className="px-6 py-4 text-center">
-                        {renderFeatureIcon(row[competitors.comp2])}
-                      </td>
-                      <td className="px-6 py-4 text-center">
-                        {renderFeatureIcon(row[competitors.comp3])}
-                      </td>
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-neutral-200 dark:divide-neutral-700">
+                  <thead className="bg-neutral-50 dark:bg-neutral-800/50">
+                    <tr>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider"
+                      >
+                        Year
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider"
+                      >
+                        Incident
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider"
+                      >
+                        Impact
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider"
+                      >
+                        Organization Type
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider"
+                      >
+                        Attack Type
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="bg-white dark:bg-neutral-900 divide-y divide-neutral-200 dark:divide-neutral-800">
+                    {notableIncidents.map((incident, index) => (
+                      <tr
+                        key={index}
+                        className={
+                          index % 2 === 0
+                            ? ""
+                            : "bg-neutral-50 dark:bg-neutral-800/20"
+                        }
+                      >
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                          {incident.year}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-neutral-700 dark:text-neutral-300">
+                          {incident.incident}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-neutral-700 dark:text-neutral-300">
+                          {incident.cost}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-neutral-700 dark:text-neutral-300">
+                          {incident.organization}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span
+                            className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                              incident.type.includes("Phishing")
+                                ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
+                                : "bg-violet-100 text-violet-800 dark:bg-violet-900/30 dark:text-violet-300"
+                            }`}
+                          >
+                            {incident.type}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
 
-              <div className="mt-6 flex items-center justify-center">
-                <div className="bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 px-4 py-2 rounded-lg text-sm font-medium flex items-center shadow-sm">
-                  <CheckCircle className="w-5 h-5 mr-2" />
-                  <span>
-                    Secure One leads with{" "}
-                    {
-                      featureData.filter((feature) => feature[competitors.us])
-                        .length
-                    }{" "}
-                    advanced features
-                  </span>
+              <div className="mt-10">
+                <h4 className="text-lg font-semibold mb-4 text-neutral-800 dark:text-neutral-200">
+                  How Our Solution Would Have Prevented These Incidents
+                </h4>
+                <div className="space-y-4">
+                  <div className="p-4 bg-neutral-50 dark:bg-neutral-800/40 rounded-lg">
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0">
+                        <CheckCircle className="h-6 w-6 text-emerald-500" />
+                      </div>
+                      <div className="ml-3">
+                        <h5 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                          Fake CEO Audio Deepfake Scam (2019)
+                        </h5>
+                        <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                          Our deepfake audio detection would have identified
+                          synthetic voice patterns and frequency anomalies,
+                          flagging the communication as fraudulent before any
+                          transfer could be initiated.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-neutral-50 dark:bg-neutral-800/40 rounded-lg">
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0">
+                        <CheckCircle className="h-6 w-6 text-emerald-500" />
+                      </div>
+                      <div className="ml-3">
+                        <h5 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                          Banking Phishing Campaign (2021)
+                        </h5>
+                        <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                          Our phishing detection engine would have analyzed the
+                          suspicious URLs and email content, identifying
+                          malicious patterns and preventing access to fraudulent
+                          banking portals.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-neutral-50 dark:bg-neutral-800/40 rounded-lg">
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0">
+                        <CheckCircle className="h-6 w-6 text-emerald-500" />
+                      </div>
+                      <div className="ml-3">
+                        <h5 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                          Election Disinformation Campaign (2024)
+                        </h5>
+                        <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                          Our multimodal deepfake detection would have
+                          identified manipulated videos, images, and audio of
+                          candidates, allowing prompt response and preventing
+                          the spread of disinformation.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           )}
 
-          {activeTab === "trends" && (
-            <div className="h-96">
+          {activeTab === "solution" && (
+            <div>
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-xl font-bold text-neutral-800 dark:text-neutral-200 flex items-center">
-                  <Clock className="w-6 h-6 mr-2 text-amber-500" />
-                  Threat Trends & Response
+                  <Shield className="w-6 h-6 mr-2 text-violet-500" />
+                  CyberShield Integrated Solution
                 </h3>
-                <div className="bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 px-3 py-1 rounded-full text-sm font-medium flex items-center">
-                  <ArrowRight className="w-4 h-4 mr-1" />
-                  Real-time Protection
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/20 dark:to-emerald-800/10 border border-emerald-200 dark:border-emerald-800/30"
+                >
+                  <div className="p-6">
+                    <div className="w-12 h-12 rounded-lg bg-emerald-500 flex items-center justify-center text-white mb-4">
+                      <Shield className="w-6 h-6" />
+                    </div>
+                    <h4 className="text-lg font-semibold mb-2 text-neutral-800 dark:text-neutral-200">
+                      Phishing Detection
+                    </h4>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                      ML-powered analysis of suspicious URLs, emails, and
+                      content to prevent phishing attacks with 98.7% accuracy.
+                    </p>
+                    <ul className="mt-4 space-y-2">
+                      <li className="flex items-center text-sm text-neutral-600 dark:text-neutral-400">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2" />
+                        URL Analysis & Verification
+                      </li>
+                      <li className="flex items-center text-sm text-neutral-600 dark:text-neutral-400">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2" />
+                        Email Header Inspection
+                      </li>
+                      <li className="flex items-center text-sm text-neutral-600 dark:text-neutral-400">
+                        <Check className="w-4 h-4 text-emerald-500 mr-2" />
+                        Content & Attachment Scanning
+                      </li>
+                    </ul>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/10 border border-blue-200 dark:border-blue-800/30"
+                >
+                  <div className="p-6">
+                    <div className="w-12 h-12 rounded-lg bg-blue-500 flex items-center justify-center text-white mb-4">
+                      <AlertTriangle className="w-6 h-6" />
+                    </div>
+                    <h4 className="text-lg font-semibold mb-2 text-neutral-800 dark:text-neutral-200">
+                      Deepfake Detection
+                    </h4>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                      Advanced AI algorithms to detect manipulated media content
+                      across images, videos, and audio.
+                    </p>
+                    <ul className="mt-4 space-y-2">
+                      <li className="flex items-center text-sm text-neutral-600 dark:text-neutral-400">
+                        <Check className="w-4 h-4 text-blue-500 mr-2" />
+                        Image Manipulation Recognition
+                      </li>
+                      <li className="flex items-center text-sm text-neutral-600 dark:text-neutral-400">
+                        <Check className="w-4 h-4 text-blue-500 mr-2" />
+                        Video Frame Analysis
+                      </li>
+                      <li className="flex items-center text-sm text-neutral-600 dark:text-neutral-400">
+                        <Check className="w-4 h-4 text-blue-500 mr-2" />
+                        Audio Frequency Pattern Detection
+                      </li>
+                    </ul>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-violet-50 to-violet-100 dark:from-violet-900/20 dark:to-violet-800/10 border border-violet-200 dark:border-violet-800/30"
+                >
+                  <div className="p-6">
+                    <div className="w-12 h-12 rounded-lg bg-violet-500 flex items-center justify-center text-white mb-4">
+                      <MessageSquare className="w-6 h-6" />
+                    </div>
+                    <h4 className="text-lg font-semibold mb-2 text-neutral-800 dark:text-neutral-200">
+                      Security Chatbot Assistant
+                    </h4>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                      Intelligent assistance for reporting cybercrimes,
+                      understanding cyber laws, and receiving security guidance.
+                    </p>
+                    <ul className="mt-4 space-y-2">
+                      <li className="flex items-center text-sm text-neutral-600 dark:text-neutral-400">
+                        <Check className="w-4 h-4 text-violet-500 mr-2" />
+                        Incident Reporting Guidance
+                      </li>
+                      <li className="flex items-center text-sm text-neutral-600 dark:text-neutral-400">
+                        <Check className="w-4 h-4 text-violet-500 mr-2" />
+                        Cyber Law Consultation
+                      </li>
+                      <li className="flex items-center text-sm text-neutral-600 dark:text-neutral-400">
+                        <Check className="w-4 h-4 text-violet-500 mr-2" />
+                        24/7 Security Assistance
+                      </li>
+                    </ul>
+                  </div>
+                </motion.div>
+              </div>
+
+              <div className="bg-neutral-50 dark:bg-neutral-800/40 rounded-xl p-6 mt-8">
+                <h4 className="text-lg font-semibold mb-4 text-neutral-800 dark:text-neutral-200 flex items-center">
+                  <Layers className="w-5 h-5 mr-2 text-neutral-800 dark:text-neutral-200" />
+                  Comprehensive Feature Set
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">
+                  {solutionFeatures.map((feature, index) => (
+                    <div key={index} className="flex items-start">
+                      <div className="flex-shrink-0 mt-1">
+                        <div className="w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+                          <Check className="w-4 h-4 text-emerald-500" />
+                        </div>
+                      </div>
+                      <div className="ml-3">
+                        <h5 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                          {feature.feature}
+                        </h5>
+                        <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
+                          {feature.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart
-                  data={threatTrendsData}
-                  margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-                >
-                  <defs>
-                    <linearGradient
-                      id="colorThreats"
-                      x1="0"
-                      y1="0"
-                      x2="0"
-                      y2="1"
-                    >
-                      <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.8} />
-                      <stop offset="95%" stopColor="#f59e0b" stopOpacity={0} />
-                    </linearGradient>
-                    <linearGradient
-                      id="colorMitigated"
-                      x1="0"
-                      y1="0"
-                      x2="0"
-                      y2="1"
-                    >
-                      <stop offset="5%" stopColor="#10b981" stopOpacity={0.8} />
-                      <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
-                  <CartesianGrid
-                    strokeDasharray="3 3"
-                    opacity={0.1}
-                    vertical={false}
-                  />
-                  <XAxis
-                    dataKey="month"
-                    tick={{ fill: "currentColor" }}
-                    axisLine={{ stroke: "#d1d5db" }}
-                    tickLine={{ stroke: "#d1d5db" }}
-                  />
-                  <YAxis
-                    tick={{ fill: "currentColor" }}
-                    axisLine={{ stroke: "#d1d5db" }}
-                    tickLine={{ stroke: "#d1d5db" }}
-                  />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Legend
-                    wrapperStyle={{ paddingTop: "10px" }}
-                    iconType="circle"
-                  />
-                  <Area
-                    type="monotone"
-                    dataKey="threats"
-                    name="Threats Detected"
-                    stroke="#f59e0b"
-                    fillOpacity={1}
-                    fill="url(#colorThreats)"
-                    strokeWidth={2}
-                  />
-                  <Area
-                    type="monotone"
-                    dataKey="mitigated"
-                    name="Threats Mitigated"
-                    stroke="#10b981"
-                    fillOpacity={1}
-                    fill="url(#colorMitigated)"
-                    strokeWidth={2}
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
+              <div className="mt-10">
+                <h4 className="text-lg font-semibold mb-4 text-neutral-800 dark:text-neutral-200 flex items-center">
+                  <LifeBuoy className="w-5 h-5 mr-2 text-amber-500" />
+                  Integrated Workflow
+                </h4>
+                <div className="relative">
+                  {/* Workflow diagram */}
+                  <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-center relative">
+                    <div className="absolute top-1/2 left-0 right-0 h-1 bg-neutral-200 dark:bg-neutral-700 -translate-y-1/2 hidden md:block"></div>
 
-              <div className="mt-4 flex items-center justify-center">
-                <div className="bg-neutral-50 dark:bg-neutral-800/50 text-neutral-700 dark:text-neutral-300 px-4 py-2 rounded-lg text-sm font-medium flex items-center shadow-sm">
-                  <Shield className="w-5 h-5 mr-2 text-emerald-500" />
-                  <span>100% of detected threats successfully mitigated</span>
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div className="w-14 h-14 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-2">
+                        <AlertTriangle className="w-7 h-7 text-emerald-500" />
+                      </div>
+                      <h5 className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+                        Threat Detection
+                      </h5>
+                      <p className="text-xs text-neutral-600 dark:text-neutral-400 max-w-[200px] mt-1">
+                        Identifies phishing and deepfake attempts in real-time
+                      </p>
+                    </div>
+
+                    <ArrowRight className="w-6 h-6 text-neutral-400 hidden md:block" />
+
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div className="w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-2">
+                        <Shield className="w-7 h-7 text-blue-500" />
+                      </div>
+                      <h5 className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+                        Prevention
+                      </h5>
+                      <p className="text-xs text-neutral-600 dark:text-neutral-400 max-w-[200px] mt-1">
+                        Blocks malicious content before damage occurs
+                      </p>
+                    </div>
+
+                    <ArrowRight className="w-6 h-6 text-neutral-400 hidden md:block" />
+
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div className="w-14 h-14 rounded-full bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center mb-2">
+                        <MessageSquare className="w-7 h-7 text-violet-500" />
+                      </div>
+                      <h5 className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+                        Assistance
+                      </h5>
+                      <p className="text-xs text-neutral-600 dark:text-neutral-400 max-w-[200px] mt-1">
+                        Provides guidance and cybersecurity education
+                      </p>
+                    </div>
+
+                    <ArrowRight className="w-6 h-6 text-neutral-400 hidden md:block" />
+
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div className="w-14 h-14 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mb-2">
+                        <FileText className="w-7 h-7 text-amber-500" />
+                      </div>
+                      <h5 className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+                        Reporting
+                      </h5>
+                      <p className="text-xs text-neutral-600 dark:text-neutral-400 max-w-[200px] mt-1">
+                        Generates detailed incident reports for authorities
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === "chatbot" && (
+            <div>
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-xl font-bold text-neutral-800 dark:text-neutral-200 flex items-center">
+                  <MessageSquare className="w-6 h-6 mr-2 text-amber-500" />
+                  Interactive Security Chatbot
+                </h3>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <div className="bg-neutral-50 dark:bg-neutral-800/40 rounded-xl p-6 h-full">
+                    <h4 className="text-lg font-semibold mb-4 text-neutral-800 dark:text-neutral-200 flex items-center">
+                      <Shield className="w-5 h-5 mr-2 text-emerald-500" />
+                      Cybercrime Reporting Assistant
+                    </h4>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                      Our AI chatbot helps individuals and organizations report
+                      cybercrimes easily and efficiently, guiding them through
+                      the reporting process.
+                    </p>
+
+                    <div className="space-y-3 mt-6">
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0 mt-1">
+                          <div className="w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+                            <Check className="w-4 h-4 text-emerald-500" />
+                          </div>
+                        </div>
+                        <div className="ml-3">
+                          <p className="text-sm text-neutral-700 dark:text-neutral-300">
+                            Step-by-step guidance for reporting incidents
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0 mt-1">
+                          <div className="w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+                            <Check className="w-4 h-4 text-emerald-500" />
+                          </div>
+                        </div>
+                        <div className="ml-3">
+                          <p className="text-sm text-neutral-700 dark:text-neutral-300">
+                            Collects relevant details for complete reports
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0 mt-1">
+                          <div className="w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+                            <Check className="w-4 h-4 text-emerald-500" />
+                          </div>
+                        </div>
+                        <div className="ml-3">
+                          <p className="text-sm text-neutral-700 dark:text-neutral-300">
+                            Provides immediate guidance to secure accounts
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0 mt-1">
+                          <div className="w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+                            <Check className="w-4 h-4 text-emerald-500" />
+                          </div>
+                        </div>
+                        <div className="ml-3">
+                          <p className="text-sm text-neutral-700 dark:text-neutral-300">
+                            Generates structured reports for law enforcement
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-8 p-4 bg-white dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-700">
+                      <h5 className="text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-2">
+                        Sample Interaction
+                      </h5>
+                      <div className="space-y-3">
+                        <div className="flex items-start">
+                          <div className="flex-shrink-0">
+                            <div className="w-8 h-8 rounded-full bg-neutral-200 dark:bg-neutral-700 flex items-center justify-center">
+                              <Users className="w-4 h-4 text-neutral-600 dark:text-neutral-300" />
+                            </div>
+                          </div>
+                          <div className="ml-3 bg-neutral-100 dark:bg-neutral-800 rounded-lg p-3 text-sm text-neutral-700 dark:text-neutral-300">
+                            I think my account was hacked. What should I do?
+                          </div>
+                        </div>
+
+                        <div className="flex items-start">
+                          <div className="flex-shrink-0">
+                            <div className="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center">
+                              <MessageSquare className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                            </div>
+                          </div>
+                          <div className="ml-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg p-3 text-sm text-neutral-700 dark:text-neutral-300">
+                            I'm sorry to hear that. Let's secure your account
+                            and report this incident. First, change your
+                            password on any unaffected accounts. Have you
+                            noticed any unauthorized transactions or changes to
+                            your account?
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="bg-neutral-50 dark:bg-neutral-800/40 rounded-xl p-6 h-full">
+                    <h4 className="text-lg font-semibold mb-4 text-neutral-800 dark:text-neutral-200 flex items-center">
+                      <FileText className="w-5 h-5 mr-2 text-blue-500" />
+                      Cyber Laws Assistant
+                    </h4>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                      Our AI assistant helps individuals and law enforcement
+                      understand cyber laws, providing clear explanations and
+                      guidance on legal procedures.
+                    </p>
+
+                    <div className="space-y-3 mt-6">
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0 mt-1">
+                          <div className="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                            <Check className="w-4 h-4 text-blue-500" />
+                          </div>
+                        </div>
+                        <div className="ml-3">
+                          <p className="text-sm text-neutral-700 dark:text-neutral-300">
+                            Simplified explanations of cyber laws
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0 mt-1">
+                          <div className="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                            <Check className="w-4 h-4 text-blue-500" />
+                          </div>
+                        </div>
+                        <div className="ml-3">
+                          <p className="text-sm text-neutral-700 dark:text-neutral-300">
+                            Legal rights guidance for cybercrime victims
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0 mt-1">
+                          <div className="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                            <Check className="w-4 h-4 text-blue-500" />
+                          </div>
+                        </div>
+                        <div className="ml-3">
+                          <p className="text-sm text-neutral-700 dark:text-neutral-300">
+                            Quick access to relevant legal sections
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0 mt-1">
+                          <div className="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                            <Check className="w-4 h-4 text-blue-500" />
+                          </div>
+                        </div>
+                        <div className="ml-3">
+                          <p className="text-sm text-neutral-700 dark:text-neutral-300">
+                            Information on legal procedures and reporting
+                            formats
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-8 p-4 bg-white dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-700">
+                      <h5 className="text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-2">
+                        Sample Interaction
+                      </h5>
+                      <div className="space-y-3">
+                        <div className="flex items-start">
+                          <div className="flex-shrink-0">
+                            <div className="w-8 h-8 rounded-full bg-neutral-200 dark:bg-neutral-700 flex items-center justify-center">
+                              <Users className="w-4 h-4 text-neutral-600 dark:text-neutral-300" />
+                            </div>
+                          </div>
+                          <div className="ml-3 bg-neutral-100 dark:bg-neutral-800 rounded-lg p-3 text-sm text-neutral-700 dark:text-neutral-300">
+                            What is the legal procedure for reporting a
+                            cybercrime?
+                          </div>
+                        </div>
+
+                        <div className="flex items-start">
+                          <div className="flex-shrink-0">
+                            <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                              <FileText className="w-4 h-4 text-blue-500" />
+                            </div>
+                          </div>
+                          <div className="ml-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 text-sm text-neutral-700 dark:text-neutral-300">
+                            Reporting a cybercrime involves collecting evidence,
+                            filing a report with the authorities, and seeking
+                            legal advice. Would you like more information on
+                            this process?
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           )}
         </motion.div>
       </AnimatePresence>
-
-      {/* Call to action section */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate={showAnimation ? "visible" : "hidden"}
-        className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-800 shadow-lg relative overflow-hidden my-12 mt-32"
-      >
-        <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/10 rounded-full filter blur-3xl"></div>
-        <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-blue-500/10 rounded-full filter blur-3xl"></div>
-
-        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6 ">
-          <div>
-            <h3 className="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">
-              Ready to upgrade your security?
-            </h3>
-            <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl">
-              Join thousands of organizations who trust Secure One's
-              quantum-resistant AI security platform. Schedule a demo today and
-              receive a free security assessment.
-            </p>
-          </div>
-          <div className="flex space-x-4">
-            <a
-              href="#schedule-demo"
-              className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center"
-            >
-              <Shield className="w-5 h-5 mr-2" />
-              Schedule Demo
-            </a>
-            <a
-              href="#learn-more"
-              className="px-6 py-3 bg-white dark:bg-neutral-800 text-emerald-600 dark:text-emerald-400 font-medium rounded-lg shadow hover:shadow-md transition-all duration-300 border border-neutral-200 dark:border-neutral-700"
-            >
-              Learn More
-            </a>
-          </div>
-        </div>
-      </motion.div>
     </div>
   );
 }

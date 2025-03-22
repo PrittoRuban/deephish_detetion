@@ -80,8 +80,10 @@ export function PhishDash() {
         variants={containerVariants}
         className="mb-12 text-center"
       >
-        <motion.div variants={itemVariants}>
-          <h2 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-neutral-900 to-neutral-700 dark:from-white dark:to-neutral-300 py-1">
+        <motion.div variants={itemVariants} className="relative z-10">
+          <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 w-full h-64 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-full filter blur-3xl"></div>
+
+          <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-blue-600 dark:from-emerald-400 dark:to-blue-400 py-2">
             Advanced Phishing Protection
           </h2>
           <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
