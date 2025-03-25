@@ -46,12 +46,18 @@ import {
   LifeBuoy,
   ThumbsUp,
   Hash,
+  ShieldCheck,
 } from "lucide-react";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("impact");
   const [hoveredCard, setHoveredCard] = useState(null);
   const [showAnimation, setShowAnimation] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleChatbotOpen = () => {
+    window.voiceflow.chat.open();
+  };
 
   useEffect(() => {
     // Trigger animations after component mounts
@@ -372,7 +378,7 @@ export default function Dashboard() {
           {/* Hackathon badge */}
           <div className="mt-8 inline-flex items-center bg-gradient-to-r from-emerald-500/20 to-blue-500/20 px-6 py-3 rounded-full text-md font-medium text-neutral-800 dark:text-neutral-200 border border-emerald-100 dark:border-blue-900">
             <Award className="w-5 h-5 mr-2 text-emerald-500" />
-            <span>Cybersecurity Innovation Hackathon 2025</span>
+            <span>Cybersecurity Innovation 2025</span>
           </div>
         </motion.div>
       </motion.div>
@@ -564,9 +570,9 @@ export default function Dashboard() {
                 </ResponsiveContainer>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 py-8">
                 <div className="h-60">
-                  <h4 className="text-lg font-semibold mb-4 text-neutral-800 dark:text-neutral-200 flex items-center">
+                  <h4 className="text-lg font-semibold mb-4 text-neutral-800 dark:text-neutral-200 flex items-center ">
                     <Lock className="w-5 h-5 mr-2 text-blue-500" />
                     Attack Volume Trends
                   </h4>
@@ -638,7 +644,7 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="mt-8 bg-neutral-50 dark:bg-neutral-800/40 rounded-xl p-6">
+              <div className="mt-16 bg-neutral-50 dark:bg-neutral-800/40 rounded-xl p-6">
                 <h4 className="text-lg font-semibold mb-4 text-neutral-800 dark:text-neutral-200 flex items-center">
                   <Activity className="w-5 h-5 mr-2 text-emerald-500" />
                   Detection Accuracy
@@ -1247,6 +1253,73 @@ export default function Dashboard() {
               </div>
             </div>
           )}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16"
+        >
+          <div
+            className="relative cursor-pointer"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {/* Animated background gradient */}
+            <div
+              className={`absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-2xl filter blur-3xl opacity-50 transition-all duration-500 ${
+                isHovered ? "scale-105" : ""
+              }`}
+            ></div>
+
+            <div className="relative z-10 bg-neutral-100 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded-2xl overflow-hidden">
+              <div className="p-6 md:flex items-center justify-between">
+                <div className="md:w-2/3 mb-4 md:mb-0">
+                  <div className="flex items-center mb-3 pb-4">
+                    <ShieldCheck className="w-8 h-8 mr-3 text-emerald-500" />
+                    <h3 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-blue-600 dark:from-emerald-400 dark:to-blue-400 pb-1">
+                      Cyber Legal Expert
+                    </h3>
+                  </div>
+                  <p className="text-neutral-700 dark:text-neutral-300 text-base md:text-lg mb-4">
+                    Instant AI-powered guidance for cyber security, legal
+                    advice, and incident reporting
+                  </p>
+                </div>
+                <div>
+                  <button
+                    onClick={handleChatbotOpen}
+                    className="w-full md:w-auto flex items-center justify-center 
+                           bg-gradient-to-r from-emerald-500 to-blue-500 
+                           text-white font-semibold 
+                           py-3 px-6 rounded-lg 
+                           transition-all duration-300 
+                           transform hover:-translate-y-1 
+                           shadow-lg hover:shadow-xl 
+                           focus:outline-none focus:ring-2 focus:ring-emerald-300"
+                  >
+                    <MessageSquare className="w-5 h-5 mr-2" />
+                    Talk to Cyber Expert
+                    <Zap className="w-4 h-4 ml-2 text-yellow-300" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Badges */}
+          <div className="flex flex-wrap items-center justify-center gap-4 mt-6">
+            <div className="flex items-center bg-neutral-100 dark:bg-neutral-800 px-4 py-2 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-300">
+              <ShieldCheck className="w-5 h-5 mr-2 text-emerald-500" />
+              <span>Legal Guidance</span>
+            </div>
+            <div className="flex items-center bg-neutral-100 dark:bg-neutral-800 px-4 py-2 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-300">
+              <MessageSquare className="w-5 h-5 mr-2 text-blue-500" />
+              <span>Instant Support</span>
+            </div>
+          </div>
         </motion.div>
       </AnimatePresence>
     </div>
